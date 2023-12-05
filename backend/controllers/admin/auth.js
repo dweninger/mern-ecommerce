@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
 
     const savedUser = await _user.save();
     if (savedUser) {
-      return res.status(200).json({ message: 'Admin created successfully' });
+      return res.status(201).json({ message: 'Admin created successfully' });
     }
   } catch (error) {
     return res.status(400).json({ message: 'Something went wrong' });
@@ -35,9 +35,10 @@ exports.login = async (req, res) => {
     if (existingUser) {
       if (existingUser.authenticate(req.body.password) && existingUser.role === 'admin') {
         const token = jwt.sign({ _id: existingUser._id, role: existingUser.role }, process.env.JWT_SECRET, {
-          expiresIn: '1h',
+          expiresIn: '1d',
         });
         const { firstName, lastName, email, role, fullName } = existingUser;
+        res.cookie('token', token, { exporesIn: '1d' });
         res.status(200).json({
           token,
           user: {
@@ -62,3 +63,10 @@ exports.login = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
+exports.logout = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({
+    message: 'Logged out successfully!'
+  });
+}

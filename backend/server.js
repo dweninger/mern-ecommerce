@@ -2,12 +2,14 @@ const express = require('express');
 const env = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 
 // routes
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
 
 // env
 env.config();
@@ -32,12 +34,14 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Use bodyParser middleware for JSON parsing
 app.use(express.json());
-
+app.use(cors());
 // Use your API routes
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
+app.use('/api', cartRoutes);
 
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
