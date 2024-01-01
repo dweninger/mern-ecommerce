@@ -40,7 +40,7 @@ export const Header = (props) => {
   }
 
   return (
-    <Navbar bg="dark" expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{ zIndex: 1 }}>
+    <Navbar fixed="top" bg="dark" expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{ zIndex: 1 }}>
       <Container fluid>
         <Navbar.Brand href="/">Admin Dashboard</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
