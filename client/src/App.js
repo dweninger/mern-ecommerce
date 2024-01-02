@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import './App.css'
+import HomePage from './containers/HomePage';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/')
-      .then(response => setMessage(response.data))
-      .catch(error => console.error(error));
-  }, []);
-
   return (
     <div className="App">
-      <h1>{message}</h1>
+      <HomePage />
     </div>
   );
 }

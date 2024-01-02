@@ -8,7 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 const NewModal = (props) => {
     return (
-        <Modal show={props.show} onHide={props.handleHide}>
+        <Modal size={props.size} show={props.show} onHide={props.handleHide}>
             <Modal.Header closeButton>
                 <Modal.Title>{props.modalTitle}</Modal.Title>
             </Modal.Header>
