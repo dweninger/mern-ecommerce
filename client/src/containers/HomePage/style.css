@@ -1,0 +1,22 @@
+.outter-carousel-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.carousel-container {
+    width: 848px;
+    height: 321px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .custom-carousel .carousel-item {
+    border-radius: 15px;
+    width: 848px;
+    height: 321px;
+  }
+
+  .custom-carousel img {
+    border-radius: 15px;
+  }

@@ -1,0 +1,133 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 0;
+    width: 230px;
+    height: 386px;
+    padding: 0 14px;
+  }
+  
+  .card-img {
+    text-align: center;
+  }
+  
+  .card-img img {
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Adjust this value for the number of lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    height: 40px; /* Example height */
+    line-height: 20px;
+  }
+  
+  .card-title a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .card-title a:hover {
+    color: #ff0000;
+  }
+  
+  .star-container {
+    display: flex;
+  }
+  
+  .star-container svg {
+    color: red;
+  }
+  
+  .remaining-stars svg {
+    color: #6c757d;
+  }
+  
+  .price-info {
+    color: #6c757d;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  
+  .our-price {
+    font-weight: 800;
+    font-size: 11px;
+    display: block;
+    margin-top: 10px;
+    color: black;
+  }
+  
+  .our-price-value {
+    font-weight: bold;
+    font-size: 22px;
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  .stock-status {
+    font-size: 11px;
+    font-weight: 900;
+    color: gray;
+    margin-bottom: 2px;
+
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .add-to-cart-button {
+    width: calc(75% - 5px);
+    border-radius: 0;
+    margin-right: 5px;
+    background-color: #ff0000;
+    font-size: 14px;
+    height: 100%;
+    font-weight: 600;
+  }
+
+  .add-to-cart-button:hover {
+    background-color: #cc0000;
+  }
+  
+  .add-to-wishlist-button {
+    width: 25%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    min-width: 30px;
+    height: 100%;
+    background-color: #000000;
+  }
+
+  .add-to-wishlist-heart {
+    font-size: 22px;
+    padding-right: 2px;
+  }
+
+  .add-to-wishlist-plus {
+    font-size: 10px;
+  }
+
+  .add-to-wishlist-button:hover {
+    background-color: black;
+  }
+
+  .button {
+    outline: none;
+    border: none;
+    height: 36px
+  }
+

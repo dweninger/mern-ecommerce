@@ -1,13 +1,14 @@
 const Product = require('../models/product');
 const shortid = require('shortid');
 const slugify = require('slugify');
+const Category = require('../models/category');
 
 exports.createProduct = async (req, res) => {
 
     //res.status(200).json({file: req.files, body: req.body});
     
     const {
-        name,price, description, category, quantity, createdBy
+        name, price, offer, description, category, quantity, createdBy
     } = req.body;
 
     let productPictures = [];
@@ -22,6 +23,7 @@ exports.createProduct = async (req, res) => {
         name: name,
         slug: slugify(name),
         price,
+        offer,
         quantity,
         description,
         productPictures,
@@ -36,4 +38,24 @@ exports.createProduct = async (req, res) => {
         res.status(400).json({ error });
     }
 
+};
+
+exports.getProductsBySlug = async (req, res) => {
+    try {
+        const { slug } = req.params;
+        const category = await Category.findOne({ slug }).select('_id').exec();
+        
+        if (!category) {
+            return res.status(404).json({ message: 'Category not found' });
+        }
+
+        if (category) {
+            const products = await Product.find({ category: category._id }).exec();
+            res.status(200).json({ 
+                products
+            });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };

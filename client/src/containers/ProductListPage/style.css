@@ -1,0 +1,16 @@
+.product-grid {
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    padding: 0px;
+    margin: 0;
+}
+
+.card-img-top {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}

@@ -17,6 +17,7 @@ const Products = (props) => {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
+  const [offer, setOffer] = useState('');
   const [description, setDescription] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [productPictures, setProductPictures] = useState('');
@@ -32,6 +33,7 @@ const Products = (props) => {
     form.append('name', name);
     form.append('quantity', quantity);
     form.append('price', price);
+    form.append('offer', offer);
     form.append('description', description);
     form.append('category', categoryId);
 
@@ -118,6 +120,11 @@ const Products = (props) => {
           onChange={(e) => setPrice(e.target.value)}
         />
         <Input
+          value={offer}
+          placeholder={'Offer'}
+          onChange={(e) => setOffer(e.target.value)}
+        />
+        <Input
           value={description}
           placeholder={'Description'}
           onChange={(e) => setDescription(e.target.value)}
@@ -172,9 +179,13 @@ const Products = (props) => {
             <label className="key">Name</label>
             <p className="value">{productDetails.name}</p>
           </Col>
-          <Col md="6">
+          <Col md="3">
             <label className="key">Price</label>
             <p className="value">{productDetails.price}</p>
+          </Col>
+          <Col md="3">
+            <label className="key">Offer</label>
+            <p className="value">{productDetails.offer}</p>
           </Col>
         </Row>
         <Row>

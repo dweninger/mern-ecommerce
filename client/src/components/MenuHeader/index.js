@@ -24,10 +24,9 @@ const MenuHeader = (props) => {
       categoriesList.push(
         <li key={category.name}>
           {
-            category.parentId ? <a href={category.slug}>{category.name}</a> :
-            <span>{category.name}</span>
+            <a href={category.slug}>{category.name}</a>
           }
-          {category.children.length > 0 ? (<ul>{renderCategories(category.children)}</ul>) : null}
+          {category.children.length > 0 ? (<ul><div className="dropdownContainer">.</div>{renderCategories(category.children)}</ul>) : null}
         </li>
       );
     }
