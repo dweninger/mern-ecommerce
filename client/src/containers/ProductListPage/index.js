@@ -3,7 +3,6 @@ import Layout from '../../components/Layout'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsBySlug } from '../../actions';
 import { useParams } from 'react-router-dom';
-import { Card, Button, Row, Col } from 'react-bootstrap';
 import './style.css';
 import ProductCard from '../../components/ProductCard';
 

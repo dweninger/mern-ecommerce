@@ -6,8 +6,6 @@
     background-color: white;
     padding: 10px 20px;
   }
-
-
   
   .search-container {
     margin-right: 20px;
@@ -57,5 +55,14 @@
 
   .button-text {
     padding-left: 5px;
+  }
+  
+  .logo-url {
+    height: 60px;
+    margin: 0 60px;
+  }
+
+  .logo-img {
+    height: 60px;
   }
   

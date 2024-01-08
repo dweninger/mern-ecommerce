@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import { Carousel } from 'react-bootstrap';
-import './style.css';
-import { generatePublicUrl } from '../../urlConfig';
+import HomeCarousel from '../../components/Carousel';
+import HomeItemSection from '../../components/HomeItemSection';
+
 
 /**
  * @author
@@ -12,40 +12,9 @@ import { generatePublicUrl } from '../../urlConfig';
 const HomePage = (props) => {
     return (
         <Layout>
-            <div className="outter-carousel-container">
-                <div className="carousel-container">
-                    <Carousel className="custom-carousel" indicators={false}>
-                        <Carousel.Item>
-                            <a href="/">
-                                <img
-                                    className="d-block w-100"
-                                    src={generatePublicUrl("Daily-Deal_Slider.jpg")}
-                                    alt="First slide"
-                                />
-                            </a>
-
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <a href="/">
-                                <img
-                                    className="d-block w-100"
-                                    src={generatePublicUrl("12-11-2023_Haba-Games_Slider.jpg")}
-                                    alt="Second slide"
-                                />
-                            </a>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <a href="/">
-                                <img
-                                    className="d-block w-100"
-                                    src={generatePublicUrl("12-19-2023_Sweet-Mess_Slider.jpg")}
-                                    alt="Third slide"
-                                />
-                            </a>
-                        </Carousel.Item>
-                    </Carousel>
-                </div>
-            </div>
+            <HomeCarousel />
+            <HomeItemSection title="Best Sellers" viewUrl="/" />
+            <HomeItemSection title="Deals" viewUrl="/" />
         </Layout>
     )
 

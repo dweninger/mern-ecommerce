@@ -1,0 +1,19 @@
+.outter-carousel-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.carousel-container {
+    width: 96%;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .custom-carousel .carousel-item {
+    border-radius: 15px;
+  }
+
+  .custom-carousel img {
+    border-radius: 15px;
+  }

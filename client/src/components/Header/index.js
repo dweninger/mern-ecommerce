@@ -27,9 +27,9 @@ const Header = (props) => {
         </Form>
       </div>
 
-      <a className="logo" href='/'><img src={generatePublicUrl('miniature-market-logo-med.png')} /></a>
+      <a className="logo-url" href='/'><img className="logo-img" src={generatePublicUrl('tt-logo.png')} /></a>
 
-      <div className="buttons-container">
+      <div className="">
         <Button variant="light" className="header-button cart-button">
           <FaShoppingCart/>
           <span className="button-text"> Cart</span>

@@ -17,15 +17,15 @@ const ProductCard = ({
     const remainingStars = 5 - filledStars;
 
     return (
-        <Card className="card">
-            <div className="card-img">
+        <Card className="item-card">
+            <div className="item-card-img">
                 <a href={slug}><Card.Img variant="top" src={generatePublicUrl(productPictures[0].img)} /></a>
             </div>
             <Card.Body>
-                <Card.Title className="card-title">
+                <Card.Title className="item-card-title">
                     <a href={slug}>{name}</a>
                 </Card.Title>
-                <div className="star-container">
+                <div className="item-star-container">
                     {[...Array(filledStars)].map((_, i) => (
                         <AiFillStar key={i} />
                     ))}
@@ -34,22 +34,22 @@ const ProductCard = ({
                     ))}
                 </div>
                 <div>
-                    <span className="price-info">
+                    <span className="item-price-info">
                         Retail Price: ${price.toFixed(2)}
                     </span>
-                    <span className="our-price">Our Price:</span>
-                    <span className="our-price-value">
+                    <span className="item-our-price">Our Price:</span>
+                    <span className="item-our-price-value">
                         $<span>{offer ? offer.toFixed(2) : price.toFixed(2)}</span>
                     </span>
                 </div>
-                <div className="stock-status">
+                <div className="item-stock-status">
                     <span>{quantity > 0 ? 'In Stock' : 'Out of Stock'}</span>
                 </div>
-                <div className="buttons-container">
-                    <Button className="add-to-cart-button button">Add to Cart</Button>
-                    <Button className="add-to-wishlist-button button">
-                        <FaRegHeart className="add-to-wishlist-heart" />
-                        <FaPlus className="add-to-wishlist-plus" />
+                <div className="item-buttons-container">
+                    <Button className="item-button item-add-to-cart-button button">Add to Cart</Button>
+                    <Button className="item-button item-add-to-wishlist-button button">
+                        <FaRegHeart className="item-add-to-wishlist-heart" />
+                        <FaPlus className="item-add-to-wishlist-plus" />
                     </Button>
                 </div>
             </Card.Body>
