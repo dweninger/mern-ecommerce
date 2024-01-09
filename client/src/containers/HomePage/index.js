@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import HomeCarousel from '../../components/Carousel';
 import HomeItemSection from '../../components/HomeItemSection';
+import CardCarousel from '../../components/CardCarousel';
 
 
 /**
@@ -13,8 +14,7 @@ const HomePage = (props) => {
     return (
         <Layout>
             <HomeCarousel />
-            <HomeItemSection title="Best Sellers" viewUrl="/" />
-            <HomeItemSection title="Deals" viewUrl="/" />
+            <CardCarousel title="Today's Deals" viewUrl="/"/>
         </Layout>
     )
 

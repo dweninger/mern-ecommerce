@@ -1,20 +1,23 @@
 .home-card {
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  width: 45%;
-  height: 310px;
-  padding: 14px 14px;
-  margin: 10px 10px;
+  border-left: 1px solid #ccc;
+  margin: 10px -1px; /* Adjust horizontal margin */
+  display: inline-block; /* Display cards in line */
+  vertical-align: top;
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 .home-card-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
 .home-card-img img {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
+  display: block;
+  max-width: 75%;
+  height: auto;
+  margin: 0 auto;
 }
 
 .home-card-title {

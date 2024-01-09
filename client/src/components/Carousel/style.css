@@ -2,12 +2,14 @@
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    width: 100%;
 }
 
 .carousel-container {
-    width: 96%;
+    width: 80%;
     border-radius: 15px;
     overflow: hidden;
+    max-height: 520px;
   }
   
   .custom-carousel .carousel-item {
@@ -16,4 +18,5 @@
 
   .custom-carousel img {
     border-radius: 15px;
+    max-height: 520px;
   }

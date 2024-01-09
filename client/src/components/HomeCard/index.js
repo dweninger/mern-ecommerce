@@ -13,8 +13,6 @@ const HomeCard = ({
     quantity,
     productPictures,
 }) => {
-    const filledStars = Math.floor(rating);
-    const remainingStars = 5 - filledStars;
 
     return (
         <div className="home-card">
@@ -35,7 +33,6 @@ const HomeCard = ({
                     <Button className="home-button home-add-to-cart-button button">Add to Cart</Button>
                     <Button className="home-button home-add-to-wishlist-button button">
                         <FaRegHeart className="home-add-to-wishlist-heart" />
-                        <FaPlus className="home-add-to-wishlist-plus" />
                     </Button>
                 </div>
             </div>
