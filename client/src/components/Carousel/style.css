@@ -7,6 +7,7 @@
 
 .carousel-container {
     width: 80%;
+    max-width: 1200px;
     border-radius: 15px;
     overflow: hidden;
     max-height: 520px;

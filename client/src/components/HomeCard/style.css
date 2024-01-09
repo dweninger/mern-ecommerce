@@ -1,9 +1,10 @@
 .home-card {
   border-left: 1px solid #ccc;
-  margin: 10px -1px; /* Adjust horizontal margin */
-  display: inline-block; /* Display cards in line */
+  margin: 10px -1px;
+  display: inline-block;
   vertical-align: top;
-  box-sizing: border-box; /* Ensure padding and border are included in the width */
+  box-sizing: border-box;
+  margin-bottom: 100px;
 }
 
 .home-card-img {
@@ -69,8 +70,7 @@
 }
 
 .home-add-to-cart-button {
-  width: 125px;
-  border-radius: 0;
+  width: 50%;
   margin-right: 5px;
   background-color: #ff0000;
   font-size: 14px;
@@ -91,19 +91,6 @@
   padding: 6px;
   height: 100%;
   background-color: #000000;
-}
-
-.home-add-to-wishlist-heart {
-  font-size: 22px;
-  padding-right: 2px;
-}
-
-.home-add-to-wishlist-plus {
-  font-size: 10px;
-}
-
-.home-add-to-wishlist-button:hover {
-  background-color: black;
 }
 
 .home-button {
