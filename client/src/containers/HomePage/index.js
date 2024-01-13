@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import HomeCarousel from '../../components/Carousel';
 import HomeItemSection from '../../components/HomeItemSection';
 import CardCarousel from '../../components/CardCarousel';
+import HeaderBanner from '../../components/HeaderBanner';
 
 
 /**
@@ -14,7 +15,8 @@ const HomePage = (props) => {
     return (
         <Layout>
             <HomeCarousel />
-            <CardCarousel title="Today's Deals" viewUrl="/"/>
+            <HeaderBanner title="Today's Deals" viewUrl="/" />
+            <CardCarousel />
         </Layout>
     )
 

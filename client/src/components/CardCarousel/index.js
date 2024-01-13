@@ -6,12 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import HomeCard from '../HomeCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsBySlug } from '../../actions';
-import HeaderBanner from '../HeaderBanner';
 
-const CardCarousel = ({
-    title,
-    viewUrl,
-}) => {
+const CardCarousel = (props) => {
     const product = useSelector(state => state.product);
     const dispatch = useDispatch();
     const [slidesToShow, setSlidesToShow] = useState(4);
@@ -25,12 +21,14 @@ const CardCarousel = ({
     }, []);
 
     const handleResize = () => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 540) {
             setSlidesToShow(2);
-        } else if (window.innerWidth <= 992) {
+        } else if (window.innerWidth <= 768) {
             setSlidesToShow(3);
-        } else {
+        } else if (window.innerWidth <= 992) {
             setSlidesToShow(4);
+        } else {
+            setSlidesToShow(5);
         }
     };
 
@@ -68,7 +66,6 @@ const CardCarousel = ({
 
     return (
         <div className="card-carousel-container">
-            <HeaderBanner title={title} viewUrl={viewUrl} />
             <div className="slider-container">
                 <Slider {...settings} className="item-slider">
                     {product.products.map((product, index) => (
