@@ -40,7 +40,7 @@ export const Register = (props) => {
 
   return (
     <Layout>
-      <Container>
+      <Container className="pt-5">
         { user.message }
         <Row className="mt-5">
           <Col md={{ span: 6, offset: 3 }}>

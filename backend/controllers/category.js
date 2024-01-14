@@ -4,13 +4,13 @@ const slugify = require('slugify');
 function createCategories(categories, parentId = null) {
   const categoryList = [];
   let category;
-  if(parentId == null) {
+  if (parentId == null) {
     category = categories.filter(cat => cat.parentId == undefined);
   } else {
     category = categories.filter(cat => cat.parentId == parentId);
   }
 
-  for(let cate of category) {
+  for (let cate of category) {
     categoryList.push({
       _id: cate._id,
       name: cate.name,
@@ -24,30 +24,30 @@ function createCategories(categories, parentId = null) {
 };
 
 exports.addCategory = async (req, res) => {
-    try {
+  try {
 
-      const categoryObj = {
-        name: req.body.name,
-        slug: slugify(req.body.name),
-      };
+    const categoryObj = {
+      name: req.body.name,
+      slug: slugify(req.body.name),
+    };
 
-      if(req.file) {
-        categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename;
-      }
-  
-      if (req.body.parentId) {
-        categoryObj.parentId = req.body.parentId;
-      }
-  
-      const cat = new Category(categoryObj);
-      const category = await cat.save();
-  
-      if (category) {
-        return res.status(201).json({ category });
-      }
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
+    if (req.file) {
+      categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename;
     }
+
+    if (req.body.parentId) {
+      categoryObj.parentId = req.body.parentId;
+    }
+
+    const cat = new Category(categoryObj);
+    const category = await cat.save();
+
+    if (category) {
+      return res.status(201).json({ category });
+    }
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
 }
 
 exports.getCategories = async (req, res) => {
@@ -58,6 +58,42 @@ exports.getCategories = async (req, res) => {
       const categoryList = createCategories(categories);
       return res.status(200).json({ categoryList });
     }
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
+
+exports.updateCategories = async (req, res) => {
+  try {
+    const { _id, name, parentId, type } = req.body;
+    const updatedCategories = [];
+    if (name instanceof Array) {
+      const { } = req.body;
+      for (let i = 0; i < name.length; i++) {
+        const category = {
+          name: name[i],
+          type: type[i]
+        };
+        if (parentId[i] !== "") {
+          category.parentId = parentId[i];
+        }
+
+        const updatedCategory = await Category.findOneAndUpdate({ _id: _id[i] }, category, { new: true });
+        updatedCategories.push(updatedCategory);
+      }
+      return res.status(201).json({ updatedCategories: updatedCategories });
+    } else {
+      const category = {
+        name,
+        type
+      };
+      if (parentId[i] !== "") {
+        category.parentId = parentId;
+      }
+      const updatedCategory = await Category.findOneAndUpdate({ _id: _id[i] }, category, { new: true });
+      return res.status(201).json({ updatedCategory });
+    }
+    res.status(200).json({ body: req.body });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
