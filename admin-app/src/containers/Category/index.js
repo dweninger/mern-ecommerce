@@ -84,7 +84,12 @@ const Category = (props) => {
 
     const createCategoryList = (categories, options = []) => {
         for (let category of categories) {
-            options.push({ value: category._id, name: category.name, parentId: category.parentId });
+            options.push({ 
+                value: category._id, 
+                name: category.name, 
+                parentId: category.parentId,
+                type: category.type,
+            });
             if (category.children.length > 0) {
                 createCategoryList(category.children, options);
             }
@@ -165,6 +170,8 @@ const Category = (props) => {
                     }
                 });
         }
+
+        setDeleteCategoryModal(false);
     }
 
     const categoryList = createCategoryList(category.categories);
@@ -228,9 +235,9 @@ const Category = (props) => {
             />
             <UpdateCategoriesModal
                 show={updateCategoryModal}
-                handleClose={updateCategoriesForm}
-                handleHide={handleUpdateHide}
-                modalTitle={'Update Categories'}
+                handleclose={updateCategoriesForm}
+                handlehide={handleUpdateHide}
+                modaltitle={'Update Categories'}
                 size="lg"
                 expandedArray={expandedArray}
                 checkedArray={checkedArray}
@@ -241,7 +248,7 @@ const Category = (props) => {
                 show={deleteCategoryModal}
                 handleClose={() => setDeleteCategoryModal(false)}
                 handleHide={handleDeleteHide}
-                modalTitle="Confirm Deleted Categories"
+                modalTitle={"Confirm Deleted Categories"}
                 expandedArray={expandedArray}
                 checkedArray={checkedArray}
                 deleteCategories={deleteCategories}

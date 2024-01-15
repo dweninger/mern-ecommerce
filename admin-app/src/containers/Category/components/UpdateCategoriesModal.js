@@ -8,9 +8,9 @@ const UpdateCategoriesModal = (props) => {
     const {
         show,
         size,
-        handleClose,
-        handleHide,
-        modalTitle,
+        handleclose,
+        handlehide,
+        modaltitle,
         expandedArray,
         checkedArray,
         handleCategoryInput,
@@ -20,9 +20,9 @@ const UpdateCategoriesModal = (props) => {
     return (
         <NewModal
             show={show}
-            handleClose={handleClose}
-            handleHide={handleHide}
-            modalTitle={modalTitle}
+            handleClose={handleclose}
+            handleHide={handlehide}
+            modalTitle={modaltitle}
             size={size}
         >
             <Row>
@@ -54,7 +54,11 @@ const UpdateCategoriesModal = (props) => {
                             </select>
                         </Col>
                         <Col>
-                            <select className="form-control">
+                            <select 
+                            className="form-control"
+                            value={item.type}
+                            onChange={(e) => handleCategoryInput('type', e.target.value, index, 'expanded')}
+                            >
                                 <option value="">Select Type</option>
                                 <option value="store">Store</option>
                                 <option value="product">Product</option>
@@ -89,11 +93,15 @@ const UpdateCategoriesModal = (props) => {
                             </select>
                         </Col>
                         <Col>
-                            <select className="form-control">
+                            <select 
+                            className="form-control"
+                            value={item.type}
+                            onChange={(e) => handleCategoryInput('type', e.target.value, index, 'checked')}
+                            >
                                 <option value="">Select Type</option>
                                 <option value="store">Store</option>
                                 <option value="product">Product</option>
-                                <option value="page">page</option>
+                                <option value="page">Page</option>
                             </select>
                         </Col>
                     </Row>

@@ -17,6 +17,7 @@ function createCategories(categories, parentId = null) {
       name: cate.name,
       slug: cate.slug,
       parentId: cate.parentId,
+      type: cate.type,
       children: createCategories(categories, cate._id),
     });
   }
@@ -88,13 +89,12 @@ exports.updateCategories = async (req, res) => {
         name,
         type
       };
-      if (parentId[i] !== "") {
+      if (parentId !== "") {
         category.parentId = parentId;
       }
-      const updatedCategory = await Category.findOneAndUpdate({ _id: _id[i] }, category, { new: true });
+      const updatedCategory = await Category.findOneAndUpdate({ _id: _id }, category, { new: true });
       return res.status(201).json({ updatedCategory });
     }
-    res.status(200).json({ body: req.body });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }

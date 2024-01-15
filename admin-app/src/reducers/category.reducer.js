@@ -9,26 +9,28 @@ const initState = {
 const buildNewCategories = (parentId, categories, category) => {
     let myCategories = [];
 
-    if(parentId == undefined) {
+    if (parentId == undefined) {
         return [
             ...categories,
             {
                 _id: category._id,
                 name: category.name,
                 slug: category.slug,
-                children: []
+                type: category.type,
+                children: [],
             }
         ];
     }
 
     for (let cat of categories) {
 
-        if(cat._id == parentId) {
+        if (cat._id == parentId) {
             const newCategory = {
                 _id: category._id,
                 name: category.name,
                 slug: category.slug,
                 parentId: category.parentId,
+                type: category.type,
                 children: [],
             };
             myCategories.push({
@@ -63,7 +65,7 @@ export default (state = initState, action) => {
         case categoryConstants.ADD_NEW_CATEGORY_SUCCESS:
             const category = action.payload.category;
             const updatedCategories = buildNewCategories(category.parentId, state.categories, category);
-            
+
             state = {
                 ...state,
                 categories: updatedCategories,
@@ -91,7 +93,27 @@ export default (state = initState, action) => {
         case categoryConstants.UPDATE_CATEGORIES_FAILURE:
             state = {
                 ...state,
-                error: action.payload.error
+                error: action.payload.error,
+                loading: false
+            }
+            break;
+        case categoryConstants.DELETE_CATEGORIES_REQUEST:
+            state = {
+                ...state,
+                loading: true,
+            }
+            break;
+        case categoryConstants.DELETE_CATEGORIES_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+            }
+            break;
+        case categoryConstants.DELETE_CATEGORIES_FAILURE:
+            state = {
+                ...state,
+                error: action.payload.error,
+                loading: false
             }
             break;
     }

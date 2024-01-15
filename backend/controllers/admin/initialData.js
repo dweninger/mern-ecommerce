@@ -16,6 +16,7 @@ function createCategories(categories, parentId = null) {
         name: cate.name,
         slug: cate.slug,
         parentId: cate.parentId,
+        type: cate.type,
         children: createCategories(categories, cate._id),
       });
     }
@@ -24,7 +25,6 @@ function createCategories(categories, parentId = null) {
   };
 
 exports.initialData = async (req, res) => {
-
     const categories = await Category.find({}).exec();
     const products = await Product.find({})
         .select('_id name price offer quantity description slug productPictures category')
