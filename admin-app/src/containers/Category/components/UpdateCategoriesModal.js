@@ -17,6 +17,12 @@ const UpdateCategoriesModal = (props) => {
         categoryList
     } = props;
 
+    const typeOptions = [
+        {name: "Store", value: "store"},
+        {name: "Product", value: "product"},
+        {name: "Page", value: "page"},
+    ]
+
     return (
         <NewModal
             show={show}
@@ -42,28 +48,22 @@ const UpdateCategoriesModal = (props) => {
                             />
                         </Col>
                         <Col>
-                            <select
-                                className="form-control"
+                            <Input
+                                type="select"
                                 value={item.parentId}
-                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'expanded')}>
-                                <option>Root Category</option>
-                                {
-                                    categoryList.map(option =>
-                                        <option key={option.value} value={option.value}>{option.name}</option>)
-                                }
-                            </select>
+                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'expanded')}
+                                options={categoryList}
+                                placeholder="Root Category"
+                            />
                         </Col>
                         <Col>
-                            <select 
-                            className="form-control"
-                            value={item.type}
-                            onChange={(e) => handleCategoryInput('type', e.target.value, index, 'expanded')}
-                            >
-                                <option value="">Select Type</option>
-                                <option value="store">Store</option>
-                                <option value="product">Product</option>
-                                <option value="page">page</option>
-                            </select>
+                            <Input
+                                type="select"
+                                value={item.type}
+                                onChange={(e) => handleCategoryInput('type', e.target.value, index, 'expanded')}
+                                options={typeOptions}
+                                placeholder="Select Type"
+                            />
                         </Col>
                     </Row>
                 )
@@ -81,28 +81,22 @@ const UpdateCategoriesModal = (props) => {
                             />
                         </Col>
                         <Col>
-                            <select
-                                className="form-control"
+                            <Input
+                                type="select"
                                 value={item.parentId}
-                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'checked')}>
-                                <option>Select Parent Category</option>
-                                {
-                                    categoryList.map(option =>
-                                        <option key={option.value} value={option.value}>{option.name}</option>)
-                                }
-                            </select>
+                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'checked')}
+                                options={categoryList}
+                                placeholder="Root Category"
+                            />
                         </Col>
                         <Col>
-                            <select 
-                            className="form-control"
-                            value={item.type}
-                            onChange={(e) => handleCategoryInput('type', e.target.value, index, 'checked')}
-                            >
-                                <option value="">Select Type</option>
-                                <option value="store">Store</option>
-                                <option value="product">Product</option>
-                                <option value="page">Page</option>
-                            </select>
+                        <Input
+                                type="select"
+                                value={item.type}
+                                onChange={(e) => handleCategoryInput('type', e.target.value, index, 'checked')}
+                                options={typeOptions}
+                                placeholder="Select Type"
+                            />
                         </Col>
                     </Row>
                 )

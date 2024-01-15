@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,6 @@ import {
     updateCategories,
     deleteCategories as deleteCategoriesAction,
 } from '../../actions';
-import NewModal from '../../components/UI/Modal';
 import CheckboxTree from 'react-checkbox-tree';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import {
@@ -43,6 +42,12 @@ const Category = (props) => {
     const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
     const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!category.loading) {
+            setShow(false);
+        }
+    }, [category.loading]);
 
     const handleClose = () => {
 
@@ -84,9 +89,9 @@ const Category = (props) => {
 
     const createCategoryList = (categories, options = []) => {
         for (let category of categories) {
-            options.push({ 
-                value: category._id, 
-                name: category.name, 
+            options.push({
+                value: category._id,
+                name: category.name,
                 parentId: category.parentId,
                 type: category.type,
             });
@@ -112,11 +117,13 @@ const Category = (props) => {
         const checkedArray = [];
         const expandedArray = [];
         checked.length > 0 && checked.forEach((categoryId, index) => {
-            const category = categories.find((category, _index) => categoryId == category.value);
+            const category = categories.find((category, _index) =>
+                categoryId == category.value);
             category && checkedArray.push(category);
         })
         expanded.length > 0 && expanded.forEach((categoryId, index) => {
-            const category = categories.find((category, _index) => categoryId == category.value);
+            const category = categories.find((category, _index) =>
+                categoryId == category.value);
             category && expandedArray.push(category);
         })
         setCheckedArray(checkedArray);
@@ -125,10 +132,12 @@ const Category = (props) => {
 
     const handleCategoryInput = (key, value, index, type) => {
         if (type == 'checked') {
-            const updatedCheckedArray = checkedArray.map((item, _index) => index == _index ? { ...item, [key]: value } : item);
+            const updatedCheckedArray = checkedArray.map((item, _index) =>
+                index == _index ? { ...item, [key]: value } : item);
             setCheckedArray(updatedCheckedArray);
         } else if (type == 'expanded') {
-            const updatedExpandedArray = expandedArray.map((item, _index) => index == _index ? { ...item, [key]: value } : item);
+            const updatedExpandedArray = expandedArray.map((item, _index) =>
+                index == _index ? { ...item, [key]: value } : item);
             setExpandedArray(updatedExpandedArray);
         }
     }
@@ -159,7 +168,8 @@ const Category = (props) => {
     }
 
     const deleteCategories = () => {
-        const checkedIdsArray = checkedArray.map((item, index) => ({ _id: item.value }));
+        const checkedIdsArray = checkedArray.map((item, index) =>
+            ({ _id: item.value }));
 
         if (checkedIdsArray.length > 0) {
             dispatch(deleteCategoriesAction(checkedIdsArray))
@@ -223,9 +233,9 @@ const Category = (props) => {
             </Container>
             <AddCategoryModal
                 show={show}
-                handleClose={handleClose}
-                handleHide={handleHide}
-                modalTitle={'Add New Category'}
+                handleclose={handleClose}
+                handlehide={handleHide}
+                modaltitle={'Add New Category'}
                 categoryName={categoryName}
                 setCategoryName={setCategoryName}
                 parentCategoryId={parentCategoryId}
@@ -244,7 +254,7 @@ const Category = (props) => {
                 handleCategoryInput={handleCategoryInput}
                 categoryList={categoryList}
             />
-            <DeleteCategoryModal 
+            <DeleteCategoryModal
                 show={deleteCategoryModal}
                 handleClose={() => setDeleteCategoryModal(false)}
                 handleHide={handleDeleteHide}

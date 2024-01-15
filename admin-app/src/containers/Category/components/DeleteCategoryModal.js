@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from '../../../components/UI/Input';
 import NewModal from '../../../components/UI/Modal';
 import { Col, Row } from 'react-bootstrap';
 
@@ -9,7 +8,6 @@ const DeleteCategoryModal = (props) => {
         handleClose,
         handleHide,
         modalTitle,
-        expandedArray,
         checkedArray,
         deleteCategories,
 

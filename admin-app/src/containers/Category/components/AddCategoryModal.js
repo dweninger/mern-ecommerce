@@ -7,9 +7,9 @@ const AddCategoryModal = (props) => {
 
     const {
         show,
-        handleClose,
-        handleHide,
-        modalTitle,
+        handleclose,
+        handlehide,
+        modaltitle,
         categoryName,
         setCategoryName,
         parentCategoryId,
@@ -21,9 +21,9 @@ const AddCategoryModal = (props) => {
     return (
         <NewModal
             show={show}
-            handleClose={handleClose}
-            handleHide={handleHide}
-            modalTitle={modalTitle}
+            handleClose={handleclose}
+            handleHide={handlehide}
+            modalTitle={modaltitle}
         >
             <Row>
                 <Col>
@@ -34,16 +34,13 @@ const AddCategoryModal = (props) => {
                     />
                 </Col>
                 <Col>
-                    <select
-                        className="form-control"
+                    <Input 
+                        type="select"
                         value={parentCategoryId}
-                        onChange={(e) => setParentCategoryId(e.target.value)}>
-                        <option>Root Category</option>
-                        {
-                            categoryList.map(option =>
-                                <option key={option.value} value={option.value}>{option.name}</option>)
-                        }
-                    </select>
+                        onChange={(e) => setParentCategoryId(e.target.value)}
+                        options={categoryList}
+                        placeholder="Root Category"
+                    />
                 </Col>
             </Row>
             <Row>
