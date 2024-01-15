@@ -1,11 +1,11 @@
 import axios from "../helpers/axios";
 import { categoryConstants } from "./constants";
 
-export const getAllCategories = () => {
+const getAllCategories = () => {
     return async dispatch => {
         dispatch({ type: categoryConstants.GET_ALL_CATEGORIES_REQUEST });
         const res = await axios.get('category/getcategory');
-        if(res.status === 200) {
+        if (res.status === 200) {
             const { categoryList } = res.data;
             dispatch({
                 type: categoryConstants.GET_ALL_CATEGORIES_SUCCESS,
@@ -14,7 +14,7 @@ export const getAllCategories = () => {
         } else {
             dispatch({
                 type: categoryConstants.GET_ALL_CATEGORIES_FAILURE,
-                payload: {error: res.data.error}
+                payload: { error: res.data.error }
             });
         }
     }
@@ -45,14 +45,20 @@ export const addCategory = (form) => {
 
 export const updateCategories = (form) => {
     return async dispatch => {
+        dispatch({ type: categoryConstants.UPDATE_CATEGORIES_REQUEST });
         try {
             const res = await axios.post(`/category/update`, form);
             if (res.status === 201) {
-                return true;
+                dispatch({ type: categoryConstants.UPDATE_CATEGORIES_SUCCESS });
+                dispatch(getAllCategories());
             } else {
-                console.log(res);
+                const { error } = res.data.error;
+                dispatch({
+                    type: categoryConstants.UPDATE_CATEGORIES_FAILURE,
+                    payload: error
+                });
             }
-        } catch (error) {   
+        } catch (error) {
             console.log(error.response);
         }
 
@@ -67,14 +73,18 @@ export const deleteCategories = (ids) => {
                     ids
                 }
             });
-            if(res.status == 201) {
+            if (res.status == 201) {
                 return true;
             } else {
                 return false
             }
-        } catch (error) {   
+        } catch (error) {
             console.log(error.response);
         }
 
     }
+}
+
+export {
+    getAllCategories,
 }
