@@ -1,0 +1,40 @@
+.register-header {
+    text-align: center;
+}
+
+.register-title {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.register-input {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 50px;
+    font-size: 18px;
+}
+
+.forgot-password-link {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-decoration: none;
+    text-align: center;
+    color: #0c6efd;
+}
+
+.no-account-signup {
+    text-align: center;
+    margin-bottom: 20px
+}
+
+.no-account-signup-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #0c6efd;
+    cursor: pointer;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import './style.css';
-import { generatePublicUrl } from '../../urlConfig';
+import { generatePublicUrl } from '../../../urlConfig';
 import { Form, FormControl, InputGroup, Button } from 'react-bootstrap';
 import { FaSearch, FaUser, FaShoppingCart} from 'react-icons/fa';
+import AccountDropdown from '../AccountDropdown';
 
 /**
  * @author
@@ -29,14 +30,11 @@ const Header = (props) => {
 
       <a className="logo-url" href='/'><img className="logo-img" src={generatePublicUrl('tt-logo.png')} /></a>
 
-      <div className="">
+      <div className="" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <AccountDropdown />
         <Button variant="light" className="header-button cart-button">
           <FaShoppingCart/>
           <span className="button-text"> Cart</span>
-        </Button>
-        <Button variant="light" className="header-button account-button">
-          <FaUser/>
-          <span className="button-text">  Account</span>
         </Button>
       </div>
     </div>
