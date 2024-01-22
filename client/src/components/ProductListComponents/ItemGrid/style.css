@@ -1,0 +1,23 @@
+.item-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    padding: 5% 5%;
+}
+
+.item-grid-card {
+    width: 21%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border-right: 1px solid #ddd;
+}
+
+.row-divider {
+    width: 85%;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.item-grid-card:nth-child(4n) {
+    border-right: none;
+}

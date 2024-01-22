@@ -1,21 +1,24 @@
-
-
-.product-list-item-container {
+.product-list-container {
     display: flex;
     flex-wrap: wrap;
-    width: 85%;
-    padding: 5% 5%;
 }
 
-.product-list-item-card {
-    width: 21%;
-    box-sizing: border-box;
-    padding: 0 10px;
-    
+.filter-bar {
+    width: 200px;
+    margin: 20px 40px;
 }
 
-.row-divider {
-    width: 100%;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.sort-bar {
+    margin-top: 20px;
+}
+
+.item-grid {
+    margin-top: 20px;
+}

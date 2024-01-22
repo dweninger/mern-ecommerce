@@ -1,0 +1,27 @@
+.filter-bar-container {
+    background-color: ghostwhite;
+    border: 1px solid lightgray;
+    border-radius: 2%;
+}
+
+h3 {
+    font-size: 18px;
+    padding: 1.5em;
+}
+
+/* style.css */
+
+.filter-bar-container {
+    /* Your existing styles for the filter bar container */
+}
+
+.accordion-item {
+    background-color: ghostwhite;
+    border: none;
+}
+
+.filter-accordion .accordion-header {
+    /* Additional styles for accordion headers */
+    padding: 10px;
+    cursor: pointer;
+}
