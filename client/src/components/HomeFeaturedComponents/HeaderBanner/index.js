@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './style.css';
-import { generatePublicUrl } from '../../urlConfig';
+import { generatePublicUrl } from '../../../urlConfig';
 
 /**
  * @author

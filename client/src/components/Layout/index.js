@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../HeaderComponents/Header';
 import MenuHeader from '../HeaderComponents/MenuHeader';
+import Footer from '../Footer';
 
 /**
  * @author
@@ -13,6 +14,7 @@ const Layout = (props) => {
         <Header />
         <MenuHeader />
         {props.children}
+        <Footer />
     </>
   )
 }

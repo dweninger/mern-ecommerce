@@ -5,7 +5,7 @@ import { generatePublicUrl } from '../../urlConfig';
 import './style.css';
 
 const rating = 4;
-const HomeCard = ({
+const ItemCard = ({
     name,
     slug,
     price,
@@ -29,11 +29,11 @@ const HomeCard = ({
                     </span>
                 </div>
                 <div className="home-buttons-container">
-                    <Button className="home-button home-add-to-cart-button button">Add to Cart</Button>
+                    <Button className="home-button home-add-to-cart-button button">+ Cart</Button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default HomeCard;
+export default ItemCard;

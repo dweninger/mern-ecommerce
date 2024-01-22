@@ -1,0 +1,8 @@
+.horz-line {
+    height: 2px;
+    border: none;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: black;
+}

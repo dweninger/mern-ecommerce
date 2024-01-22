@@ -5,7 +5,7 @@ import { generatePublicUrl } from '../../urlConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsBySlug } from '../../actions';
 import { useParams } from 'react-router-dom';
-import HomeCard from '../HomeCard';
+import ItemCard from '../ItemCard';
 
 /**
  * @author
@@ -36,7 +36,7 @@ const HomeItemSection = (
             </div>
             <div className="item-grid" style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {product.products.map((product, index) => (
-                    <HomeCard key={index} {...product} />
+                    <ItemCard key={index} {...product} />
                 ))}
             </div>
         </div>

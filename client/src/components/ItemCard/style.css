@@ -4,7 +4,7 @@
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .home-card-img {
@@ -80,17 +80,6 @@
 
 .home-add-to-cart-button:hover {
   background-color: #cc0000;
-}
-
-.home-add-to-wishlist-button {
-  width: 50px;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  height: 100%;
-  background-color: #000000;
 }
 
 .home-button {

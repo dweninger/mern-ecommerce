@@ -16,7 +16,7 @@ const Header = (props) => {
       <div className="search-container">
         <Form>
           <InputGroup>
-            <Form.Group>
+            <Form.Group style={{width: '75%'}}>
               <Form.Control
                 placeholder='Search'
               />

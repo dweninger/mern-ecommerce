@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductsBySlug } from '../../actions';
 import { useParams } from 'react-router-dom';
 import './style.css';
-import ProductCard from '../../components/ProductCard';
+import ItemCard from '../../components/ItemCard';
 
 /**
  * @author
@@ -23,9 +23,12 @@ const ProductListPage = (props) => {
 
   return (
     <Layout>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="product-list-item-container">
         {product.products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+            <div className="product-list-item-card">
+              <ItemCard key={index} {...product} style={{}} />
+            </div>
+            
         ))}
       </div>
 

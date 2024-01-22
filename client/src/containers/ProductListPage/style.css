@@ -1,16 +1,21 @@
-.product-grid {
-    padding: 0;
-    margin: 0;
+
+
+.product-list-item-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    padding: 5% 5%;
 }
 
-.card {
-    padding: 0px;
-    margin: 0;
+.product-list-item-card {
+    width: 21%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    
 }
 
-.card-img-top {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    text-align: center;
-}
+.row-divider {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }

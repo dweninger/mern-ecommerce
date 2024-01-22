@@ -3,9 +3,9 @@ import Slider from 'react-slick';
 import './style.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import HomeCard from '../HomeCard';
+import ItemCard from '../../ItemCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductsBySlug } from '../../actions';
+import { getProductsBySlug } from '../../../actions';
 
 const CardCarousel = (props) => {
     const product = useSelector(state => state.product);
@@ -21,7 +21,7 @@ const CardCarousel = (props) => {
     }, []);
 
     const handleResize = () => {
-        if (window.innerWidth <= 540) {
+        if (window.innerWidth <= 576) {
             setSlidesToShow(2);
         } else if (window.innerWidth <= 768) {
             setSlidesToShow(3);
@@ -69,7 +69,7 @@ const CardCarousel = (props) => {
             <div className="slider-container">
                 <Slider {...settings} className="item-slider">
                     {product.products.map((product, index) => (
-                        <HomeCard key={index} {...product} />
+                        <ItemCard key={index} {...product} />
                     ))}
                 </Slider>
             </div>
