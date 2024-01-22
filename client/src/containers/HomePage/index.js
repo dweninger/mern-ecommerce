@@ -23,7 +23,6 @@ const HomePage = (props) => {
             <CardCarousel />
             <hr className="horz-line" />
             <HomeInfoSection />
-            <Footer />
         </Layout>
     )
 
