@@ -1,19 +1,19 @@
 .item-grid-container {
     display: flex;
     flex-wrap: wrap;
-    width: 85%;
+    width: 100%;
     padding: 5% 5%;
 }
 
 .item-grid-card {
-    width: 21%;
+    width: 24%;
     box-sizing: border-box;
     padding: 0 10px;
     border-right: 1px solid #ddd;
 }
 
 .row-divider {
-    width: 85%;
+    width: 100%;
     border-bottom: 1px solid #ddd;
 }
 
