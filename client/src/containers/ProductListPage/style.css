@@ -1,6 +1,14 @@
 .product-list-container {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.category-description {
+    margin-right: 60px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .filter-bar {

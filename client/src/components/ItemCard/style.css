@@ -20,6 +20,10 @@
   margin: 0 auto;
 }
 
+.home-card-img img:hover {
+  filter: opacity(70%);
+}
+
 .home-card-title {
   text-align: center;
   font-weight: bold;
@@ -41,7 +45,7 @@
 }
 
 .home-card-title a:hover {
-  color: black;
+  color: #d60000;
 }
 
 .home-our-price {

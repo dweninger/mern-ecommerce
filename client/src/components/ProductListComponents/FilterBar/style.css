@@ -9,10 +9,8 @@ h3 {
     padding: 1.5em;
 }
 
-/* style.css */
-
 .filter-bar-container {
-    /* Your existing styles for the filter bar container */
+    
 }
 
 .accordion-item {
@@ -21,7 +19,6 @@ h3 {
 }
 
 .filter-accordion .accordion-header {
-    /* Additional styles for accordion headers */
     padding: 10px;
     cursor: pointer;
 }

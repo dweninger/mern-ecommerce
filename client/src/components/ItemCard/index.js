@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FaRegHeart, FaPlus } from 'react-icons/fa';
 import { generatePublicUrl } from '../../urlConfig';
 import './style.css';
 
-const rating = 4;
 const ItemCard = ({
     name,
     slug,
@@ -13,11 +12,28 @@ const ItemCard = ({
     quantity,
     productPictures,
 }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const handleImageHover = (index) => {
+        // Switch to the next image if it exists
+        if (index < productPictures.length - 1) {
+            setCurrentImageIndex(index + 1);
+        } else {
+            // Reset to the first image when mouse leaves
+            setCurrentImageIndex(0);
+        }
+    };
 
     return (
         <div className="home-card">
             <div className="home-card-img">
-                <a href={slug}><img src={generatePublicUrl(productPictures[0].img)} /></a>
+                <a href={slug}>
+                    <img
+                        src={generatePublicUrl(productPictures[currentImageIndex].img)}
+                        onMouseOver={() => handleImageHover(currentImageIndex)}
+                        onMouseLeave={() => setCurrentImageIndex(0)} // Reset to the first image on mouse leave
+                    />
+                </a>
             </div>
             <div>
                 <div className="home-card-title">
