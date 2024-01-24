@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      if (existingUser.authenticate(req.body.password)) {
+      if (existingUser.authenticate(req.body.password) && existingUser.role === 'user') {
         const token = jwt.sign({ _id: existingUser._id, role: existingUser.role }, process.env.JWT_SECRET, {
           expiresIn: '1d',
         });
@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
         });
       } else {
         return res.status(400).json({
-          message: 'Invalid password',
+          message: 'Invalid login credentials',
         });
       }
     } else {
@@ -62,3 +62,10 @@ exports.login = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
+exports.logout = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({
+    message: 'Logged out successfully!'
+  });
+}

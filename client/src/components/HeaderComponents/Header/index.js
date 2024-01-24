@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 import { generatePublicUrl } from '../../../urlConfig';
-import { Form, FormControl, InputGroup, Button } from 'react-bootstrap';
-import { FaSearch, FaUser, FaShoppingCart} from 'react-icons/fa';
+import { Form, InputGroup, Button } from 'react-bootstrap';
+import { FaSearch, FaShoppingCart} from 'react-icons/fa';
 import AccountDropdown from '../AccountDropdown';
 
 /**

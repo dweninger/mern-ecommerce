@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Input from '../../components/UI/Input';
@@ -12,7 +12,7 @@ import { Navigate } from 'react-router-dom';
 **/
 
 export const Login = (props) => {
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,9 +23,9 @@ export const Login = (props) => {
   const userLogin = (e) => {
 
     e.preventDefault();
-    
+
     const user = {
-      email,password,
+      email, password,
     }
 
     dispatch(login(user));

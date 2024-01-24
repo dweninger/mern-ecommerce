@@ -14,6 +14,7 @@ const CardCarousel = (props) => {
 
     useEffect(() => {
         dispatch(getProductsBySlug("Board-Games"));
+        handleResize();
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
