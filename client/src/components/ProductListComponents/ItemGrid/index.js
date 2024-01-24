@@ -25,7 +25,7 @@ const ItemGrid = (props) => {
       {product.products.map((product, index) => (
         <>
           <div className="item-grid-card">
-            <ItemCard key={index} {...product} style={{}} />
+            <ItemCard key={index} {...product} />
           </div>
           {index % 4 === 3 && <div className="row-divider"></div>}
         </>

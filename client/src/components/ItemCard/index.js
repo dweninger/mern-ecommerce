@@ -7,12 +7,14 @@ import './style.css';
 const ItemCard = ({
     name,
     slug,
+    _id,
     price,
     offer,
     quantity,
     productPictures,
 }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const prodUrl = `${slug}/${_id}`
 
     const handleImageHover = (index) => {
         // Switch to the next image if it exists
@@ -27,7 +29,7 @@ const ItemCard = ({
     return (
         <div className="home-card">
             <div className="home-card-img">
-                <a href={slug}>
+                <a href={prodUrl}>
                     <img
                         src={generatePublicUrl(productPictures[currentImageIndex].img)}
                         onMouseOver={() => handleImageHover(currentImageIndex)}
@@ -37,7 +39,7 @@ const ItemCard = ({
             </div>
             <div>
                 <div className="home-card-title">
-                    <a href={slug}>{name}</a>
+                    <a href={prodUrl}>{name}</a>
                 </div>
                 <div className="home-price-container">
                     <span className="home-our-price-value">

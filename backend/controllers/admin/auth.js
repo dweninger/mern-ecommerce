@@ -39,7 +39,6 @@ exports.login = async (req, res) => {
           expiresIn: '1d',
         });
         const { firstName, lastName, email, role, fullName } = existingUser;
-        res.cookie('token', token, { exporesIn: '1d' });
         res.status(200).json({
           token,
           user: {

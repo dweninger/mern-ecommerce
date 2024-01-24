@@ -20,7 +20,7 @@ function App() {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn());
     }
-    if(auth.authenticate) {
+    if (auth.authenticate) {
       dispatch(getInitialData());
     }
   }, [auth.authenticate]);

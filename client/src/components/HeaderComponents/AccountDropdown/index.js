@@ -56,7 +56,6 @@ const AccountDropdown = () => {
   }
 
   const renderNonLoggedInMenu = () => {
-    console.log(auth);
     return (
       <div className="account-links">
         <button onClick={handleShowLogin} className="account-link"><IoLogIn /> Log In</button>
