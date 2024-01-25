@@ -1,0 +1,13 @@
+.selected-img {
+    border-bottom: 2px solid darkgray;
+}
+
+.carousel-image {
+    padding-right: 10px;
+    padding-bottom: 6px;
+}
+
+.carousel-image:hover {
+    cursor: pointer;
+    filter: opacity(70%);
+}
