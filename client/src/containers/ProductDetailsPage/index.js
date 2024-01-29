@@ -3,13 +3,13 @@ import Layout from '../../components/Layout';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductDetailsById } from '../../actions';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { generatePublicUrl } from '../../urlConfig';
 import QuantityInput from '../../components/QuantityInput';
 import { Button } from 'react-bootstrap';
 import MultiImageCarousel from '../../components/MultiImageCarousel';
-import Zoom from 'react-image-zoom';
-import ProductImageZoom from '../../components/ProductImageZoom';
+import { FaStar } from "react-icons/fa";
+import { addToCart } from '../../actions';
 
 
 /**
@@ -20,13 +20,12 @@ import ProductImageZoom from '../../components/ProductImageZoom';
 const ProductDetailsPage = (props) => {
     const { productId } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const product = useSelector(state => state.product);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const productPictures = product.productDetails.productPictures;
     const [quantity, setQuantity] = useState(1);
     const [subtotal, setSubtotal] = useState(product.productDetails.offer);
-
-    const zoomAttrs = { width: 360, height: 500, img: productPictures && productPictures.length > 0 ? generatePublicUrl(productPictures[currentImageIndex].img) : '' };
 
     useEffect(() => {
         const payload = {
@@ -62,15 +61,7 @@ const ProductDetailsPage = (props) => {
                             <>
                                 <div className="col-md-5">
                                     <div className="product-details-image">
-                                        {/* <ReactImageZoom {...zoomAttrs} /> */}
                                         <img src={generatePublicUrl(productPictures[currentImageIndex].img)} />
-                                        {/* <ProductImageZoom imageSrc={generatePublicUrl(productPictures[currentImageIndex].img)} /> */}
-                                        {/* <Zoom
-                                            img={generatePublicUrl(productPictures[currentImageIndex].img)}
-                                            zoomScale={3}
-                                            width={400}
-                                            height={500}
-                                        /> */}
                                     </div>
                                     <div className="product-pictures">
                                         <MultiImageCarousel
@@ -83,6 +74,14 @@ const ProductDetailsPage = (props) => {
                         )}
                         <div className="product-details col-md-7">
                             <span className="product-name">{product.productDetails.name}</span>
+                            <div className="reviews">
+                                <div className="review-star-box">
+                                    <span>4.3</span>
+                                    <span> <FaStar className="star-icon" /></span>
+                                </div>
+                                <a href="#" className="ratings-link">2,457 Ratings & 238 Reviews</a>
+
+                            </div>
                             <table className="table table-borderless product-details-table">
                                 <tbody>
                                     <tr>
@@ -99,7 +98,11 @@ const ProductDetailsPage = (props) => {
                                     </tr>
                                 </tbody>
                             </table>
-                            <div className="product-price">${product.productDetails.offer}</div>
+                            <div className="product-price">
+                                {
+                                    product.productDetails && product.productDetails.offer ? `$${product.productDetails.offer.toFixed(2)}` : "$"
+                                }
+                            </div>
                             <div className="details-order-quantity">
                                 <span className="quantity-label">Quantity:</span>
                                 <QuantityInput
@@ -109,7 +112,17 @@ const ProductDetailsPage = (props) => {
                                 />
                             </div>
                             <div className="product-subtotal">Subtotal: ${subtotal}</div>
-                            <Button className="home-button home-add-to-cart-button button product-details-cart-button">Add to Cart</Button>
+                            <Button
+                                className="home-button home-add-to-cart-button button product-details-cart-button"
+                                onClick={() => {
+                                    const { _id, name, price } = product.productDetails;
+                                    const img = product.productDetails.productPictures[0].img;
+                                    dispatch(addToCart({ _id, name, price, img }));
+                                    navigate('/cart');
+                                }}
+                            >
+                                Add to Cart
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -120,8 +133,8 @@ const ProductDetailsPage = (props) => {
                     <img className="triangle-cutout" src={generatePublicUrl("ribbon.png")} />
                 </div>
                 <div className="product-details-description-container">
-                    <div class="row">
-                        <div class="col-md-3">
+                    <div className="row">
+                        <div className="col-md-3">
                             <table className="table table-striped table-bordered description-table">
                                 <tbody>
                                     <tr>
@@ -139,7 +152,7 @@ const ProductDetailsPage = (props) => {
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-9">
+                        <div className="col-md-9">
                             <div className="description">
                                 {product.productDetails.description}
                             </div>

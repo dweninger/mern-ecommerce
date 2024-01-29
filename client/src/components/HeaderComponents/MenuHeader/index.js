@@ -5,7 +5,7 @@ import { getAllCategories } from '../../../actions';
 
 /**
  * @author
- * @function MenuHeader 
+ * @function MenuHeader
  */
 
 const MenuHeader = (props) => {
@@ -17,14 +17,16 @@ const MenuHeader = (props) => {
     dispatch(getAllCategories());
   }, []);
 
+
   const renderCategories = (categories) => {
 
     let categoriesList = [];
     for (let category of categories) {
+      const catUrl = `/${category.slug}`
       categoriesList.push(
         <li key={category.name}>
           {
-            <a href={category.slug}>{category.name}</a>
+            <a href={catUrl}>{category.name}</a>
           }
           {category.children.length > 0 ? (<ul><div className="dropdownContainer">.</div>{renderCategories(category.children)}</ul>) : null}
         </li>

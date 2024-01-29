@@ -8,7 +8,7 @@ const HomeCarousel = (props) => {
     return (
         <div className="outter-carousel-container">
             <div className="carousel-container">
-                <Carousel className="custom-carousel">
+                <Carousel data-bs-theme="dark" className="custom-carousel">
                     <Carousel.Item>
                         <a href="/">
                             <img

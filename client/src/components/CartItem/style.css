@@ -1,0 +1,28 @@
+.cart-item-container {
+    border-bottom: 1px dotted gray;
+}
+
+.cart-item-image {
+   width: 100px;
+}
+
+.cart-item-name {
+    
+}
+
+.cart-item-price {
+    font-weight: 700;
+}
+
+.cart-item-quantity-label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.cart-buttons-container  {
+    display: flex;
+}
+
+.cart-remove-btn {
+    margin-left: 20px;
+}

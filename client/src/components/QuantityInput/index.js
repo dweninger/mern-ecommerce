@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import './style.css';
 
+/**
+ * @author
+ * @function QuantityInput
+ */
+
 const QuantityInput = ({ quantity, onChange }) => {
   const [value, setValue] = useState(quantity);
 

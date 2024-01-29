@@ -11,7 +11,7 @@ const MultiImageCarousel = ({
 }) => {
 
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    
+
     if (!images || !Array.isArray(images)) {
         return null;
     }
@@ -20,7 +20,7 @@ const MultiImageCarousel = ({
         dots: false,
         infinite: true,
         speed: 0,
-        slidesToShow: 4,
+        slidesToShow: images.length >= 4 ? 4 : images.length,
         slidesToScroll: 1,
         nextArrow: <CustomNextArrow />,
         prevArrow: <CustomPrevArrow />
@@ -62,7 +62,7 @@ const MultiImageCarousel = ({
                             key={index}
                             className={`carousel-image ${selectedImageIndex === index ? 'selected-img' : ''}`}
                             onClick={() => handleImageClick(index)}
-                            src={generatePublicUrl(image.img)} 
+                            src={generatePublicUrl(image.img)}
                         />
                     ))}
                 </Slider>

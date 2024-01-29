@@ -16,15 +16,15 @@ const FilterBar = (props) => {
         <Accordion.Item className="filter-accordion-item" eventKey="0">
           <Accordion.Header>Sub Category</Accordion.Header>
           <Accordion.Body>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+              <label className="form-check-label" for="flexCheckDefault">
                 Cooperative
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 Family
               </label>
             </div>
@@ -33,39 +33,39 @@ const FilterBar = (props) => {
         <Accordion.Item eventKey="1">
           <Accordion.Header>Players</Accordion.Header>
           <Accordion.Body>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+              <label className="form-check-label" for="flexCheckDefault">
                 1 Player
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 2 Players
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 3 Players
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 4 Players
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 5 Players
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 6+ Players
               </label>
             </div>
@@ -74,57 +74,57 @@ const FilterBar = (props) => {
         <Accordion.Item eventKey="2">
           <Accordion.Header>Age</Accordion.Header>
           <Accordion.Body>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+              <label className="form-check-label" for="flexCheckDefault">
                 4+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 6+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 8+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 10+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 12+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 14+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 16+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 18+
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+              <label className="form-check-label" for="flexCheckChecked">
                 21+
               </label>
             </div>
