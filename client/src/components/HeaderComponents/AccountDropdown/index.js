@@ -10,6 +10,7 @@ import { useState } from 'react';
 import './style.css'; // Include your custom CSS file
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../../actions';
+import { useNavigate } from 'react-router-dom';
 
 const AccountDropdown = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -17,6 +18,7 @@ const AccountDropdown = () => {
   const [showPopover, setShowPopover] = useState(false);
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleShowLogin = () => {
     setShowLogin(true);
@@ -35,6 +37,7 @@ const AccountDropdown = () => {
   const userLogout = (e) => {
     dispatch(signout());
     setShowPopover(false);
+    navigate('/');
 }
 
   useEffect(() => {

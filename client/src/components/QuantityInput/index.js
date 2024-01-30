@@ -43,6 +43,7 @@ const QuantityInput = ({ quantity, onChange }) => {
         className="form-control text-center"
         value={value}
         onChange={handleInputChange}
+        readOnly={true}
       />
       <button className="btn btn-secondary" onClick={handleIncrement}>
         +

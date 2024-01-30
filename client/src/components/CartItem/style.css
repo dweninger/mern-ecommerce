@@ -1,17 +1,39 @@
 .cart-item-container {
     border-bottom: 1px dotted gray;
+    padding-bottom: 10px;
 }
 
 .cart-item-image {
-   width: 100px;
+   width: 120px;
 }
 
+.cart-item-image:hover {
+    filter: opacity(70%);
+  }
+
 .cart-item-name {
-    
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.cart-item-number {
+    font-weight: 500;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.cart-item-name:hover {
+    color: #d60000;
+    text-decoration: underline;
 }
 
 .cart-item-price {
     font-weight: 700;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 .cart-item-quantity-label {

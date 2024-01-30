@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 
 /**
  * @author
@@ -16,16 +16,31 @@ const RegisterModal = (props) => {
             </Modal.Header>
 
             <Modal.Body>
-                <Form.Group className="register-group">
-                    <Form.Control type="text" placeholder="Email" className="register-input" />
-                </Form.Group>
-
-                <Form.Group className="register-group">
-                    <Form.Control type="password" placeholder="Create password" className="register-input" />
-                </Form.Group>
-                <Form.Group className="register-group">
-                    <Form.Control type="password" placeholder="Confirm password" className="register-input" />
-                </Form.Group>
+                <Form className="register-form">
+                    <Row>
+                        <Col>
+                            <Form.Control type="text" placeholder="First name" className="register-input" />
+                        </Col>
+                        <Col>
+                            <Form.Control type="text" placeholder="Last name" className="register-input" />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Control type="text" placeholder="Email" className="register-input" />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Control type="password" placeholder="Create password" className="register-input" />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Control type="password" placeholder="Confirm password" className="register-input" />
+                        </Col>
+                    </Row>
+                </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" className='w-100 mx-5' >

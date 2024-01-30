@@ -5,12 +5,18 @@ import QuantityInput from '../QuantityInput';
 
 const CartItem = (props) => {
 
-    const [quantity, setQuantity] = useState(1);
+    const {
+        _id, name, price, qty, img
+    } = props.cartItem;
+
+    const [quantity, setQuantity] = useState(qty);
+
     const handleQuantityChange = newQuantity => {
         setQuantity(newQuantity);
+        props.onQuantityChange(_id, newQuantity, qty);
     };
 
-    const itemUrl = `/${props.name}/${props.id}`;
+    const itemUrl = `/${name}/${_id}`;
 
     return (
         <div className="cart-item-container">
@@ -19,18 +25,19 @@ const CartItem = (props) => {
                     <a href={itemUrl}>
                         <img
                             className="cart-item-image"
-                            src={generatePublicUrl(props.img)}
-                            alt={props.name}
+                            src={generatePublicUrl(img)}
+                            alt={name}
                         />
                     </a>
                 </div>
                 <div className="col">
-                    <div className="cart-item-name">{props.name}</div>
-                    <div className="cart-item-price">${props.price * props.qty}</div>
+                    <a href={itemUrl} className="cart-item-name">{name}</a>
+                    <div className="cart-item-number">Item #: {_id}</div>
+                    <div className="cart-item-price">${price * qty}</div>
                     <div className="cart-item-quantity-label">Quantity: </div>
                     <div className="cart-buttons-container">
                         <QuantityInput
-                            quantity={props.qty}
+                            quantity={qty}
                             onChange={handleQuantityChange}
                         />
                         <button className="btn btn-outline-danger cart-remove-btn">Remove</button>

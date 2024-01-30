@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import './style.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../../components/CartItem';
+import { addToCart, getCartItems } from '../../actions';
 
 
 /**
@@ -13,7 +14,26 @@ import CartItem from '../../components/CartItem';
 const CartPage = (props) => {
 
     const cart = useSelector(state => state.cart);
-    const cartItems = cart.cartItems;
+    const auth = useSelector(state => state.auth);
+    // const cartItems = cart.cartItems;
+    const [cartItems, setCartItems] = useState(cart.cartItems);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setCartItems(cart.cartItems);
+    }, [cart.cartItems]);
+
+    useEffect(() => {
+        if(auth.authenticate) {
+            dispatch(getCartItems());
+        }
+    }, [auth.authenticate]);
+
+    const onQuantityChange = (_id, qty, prevQty) => {
+        const { name, price, img } = cartItems[_id];
+        const addAmt = qty - prevQty;
+        dispatch(addToCart({_id, name, price, img}, addAmt))
+    }
 
     return (
         <Layout>
@@ -21,11 +41,9 @@ const CartPage = (props) => {
                 {
                     Object.keys(cartItems).map((key, index) =>
                         <CartItem
-                            id={key}
-                            name={cartItems[key].name}
-                            price={cartItems[key].price}
-                            img={cartItems[key].img}
-                            qty={cartItems[key].qty}
+                            key={index}
+                            cartItem={cartItems[key]}
+                            onQuantityChange={onQuantityChange}
                         />
                     )
                 }

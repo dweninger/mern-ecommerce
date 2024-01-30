@@ -32,7 +32,7 @@ const Header = (props) => {
 
       <div className="" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <AccountDropdown />
-        <Button variant="light" className="header-button cart-button">
+        <Button href="/cart" variant="light" className="header-button cart-button">
           <FaShoppingCart/>
           <span className="button-text"> Cart</span>
         </Button>

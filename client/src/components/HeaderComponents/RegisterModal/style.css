@@ -7,10 +7,14 @@
     margin: 0 auto;
 }
 
+.register-form {
+    width: 80%;
+    margin: auto;
+}
+
 .register-input {
     margin: 0 auto;
     margin-bottom: 20px;
-    width: 80%;
     height: 50px;
     font-size: 18px;
 }

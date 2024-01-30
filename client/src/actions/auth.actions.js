@@ -1,18 +1,18 @@
 import axios from "../helpers/axios";
-import { authConstants } from "./constants";
+import { authConstants, cartConstants } from "./constants";
 
 export const login = (user) => {
 
     return async (dispatch) => {
 
-        dispatch({type: authConstants.LOGIN_REQUEST});
+        dispatch({ type: authConstants.LOGIN_REQUEST });
 
         const res = await axios.post('/login', {
             ...user
         });
 
-        if(res.status === 200) {
-            const {token, user} = res.data;
+        if (res.status === 200) {
+            const { token, user } = res.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             dispatch({
@@ -22,7 +22,7 @@ export const login = (user) => {
                 }
             });
         } else {
-            if(res.status === 400) {
+            if (res.status === 400) {
                 dispatch({
                     type: authConstants.LOGIN_FAILURE,
                     payload: { error: res.data.error }
@@ -35,7 +35,7 @@ export const login = (user) => {
 export const isUserLoggedIn = () => {
     return async dispatch => {
         const token = localStorage.getItem('token');
-        if(token) {
+        if (token) {
             const user = JSON.parse(localStorage.getItem('user'));
             dispatch({
                 type: authConstants.LOGIN_SUCCESS,
@@ -57,13 +57,14 @@ export const signout = () => {
         dispatch({ type: authConstants.LOGOUT_REQUEST });
         const res = await axios.post('/logout');
 
-        if(res.status === 200) {
+        if (res.status === 200) {
             localStorage.clear();
             dispatch({ type: authConstants.LOGOUT_SUCCESS });
+            dispatch({ type: cartConstants.RESET_CART });
         } else {
-            dispatch({ 
+            dispatch({
                 type: authConstants.LOGOUT_FAILURE,
-                payload: {error: res.data.error}
+                payload: { error: res.data.error }
             });
         }
     }
