@@ -29,10 +29,10 @@ const CartPage = (props) => {
         }
     }, [auth.authenticate]);
 
-    const onQuantityChange = (_id, qty, prevQty) => {
-        const { name, price, img } = cartItems[_id];
+    const onQuantityChange = (index, _id, qty, prevQty) => {
+        const { name, price, img } = cartItems[index];
         const addAmt = qty - prevQty;
-        dispatch(addToCart({_id, name, price, img}, addAmt))
+        dispatch(addToCart(index, {_id, name, price, img}, addAmt))
     }
 
     return (
@@ -42,7 +42,9 @@ const CartPage = (props) => {
                     Object.keys(cartItems).map((key, index) =>
                         <CartItem
                             key={index}
+                            index={index}
                             cartItem={cartItems[key]}
+                            id={cartItems[key]._id}
                             onQuantityChange={onQuantityChange}
                         />
                     )

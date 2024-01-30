@@ -6,14 +6,17 @@ import QuantityInput from '../QuantityInput';
 const CartItem = (props) => {
 
     const {
-        _id, name, price, qty, img
+        name, price, qty, img
     } = props.cartItem;
+
+    const _id = props.id;
+    const index = props.index;
 
     const [quantity, setQuantity] = useState(qty);
 
-    const handleQuantityChange = newQuantity => {
+    const handleQuantityChange = (newQuantity) => {
         setQuantity(newQuantity);
-        props.onQuantityChange(_id, newQuantity, qty);
+        props.onQuantityChange(index, _id, newQuantity, qty);
     };
 
     const itemUrl = `/${name}/${_id}`;
@@ -33,7 +36,7 @@ const CartItem = (props) => {
                 <div className="col">
                     <a href={itemUrl} className="cart-item-name">{name}</a>
                     <div className="cart-item-number">Item #: {_id}</div>
-                    <div className="cart-item-price">${price * qty}</div>
+                    <div className="cart-item-price">${(price * qty).toFixed(2)}</div>
                     <div className="cart-item-quantity-label">Quantity: </div>
                     <div className="cart-buttons-container">
                         <QuantityInput

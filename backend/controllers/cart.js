@@ -1,11 +1,13 @@
 const Cart = require('../models/cart');
 
 function runUpdate(condition, updateData) {
+
     return new Promise((resolve, reject) => {
+    
         Cart.findOneAndUpdate(condition, updateData, { upsert: true })
-            .then(result => resolve())
-            .catch(err => reject(err));
-    });
+          .then((result) => resolve())
+          .catch((err) => reject(err));
+      });
 }
 
 exports.addItemToCart = async (req, res) => {
@@ -22,7 +24,9 @@ exports.addItemToCart = async (req, res) => {
                     condition = { user: req.user._id, "cartItems.product": product };
                     update = {
                         "$set": {
-                            "cartItems.$": cartItem
+                            "cartItems.$": {
+                                ...cartItem
+                            }
                         },
                     };
                 } else {
@@ -65,7 +69,7 @@ exports.getCartItems = async (req, res) => {
         if (!cart) {
             return res.status(400).json({ error: 'Cart not found' });
         }
-
+        console.log(cart.cartItems);
         const cartItems = cart.cartItems.map((item) => ({
             _id: item.product._id.toString(),
             name: item.product.name,
