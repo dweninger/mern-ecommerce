@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { FaRegHeart, FaPlus } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { generatePublicUrl } from '../../urlConfig';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
+import { addToCart } from '../../actions';
 
 const ItemCard = ({
     name,
@@ -15,13 +17,13 @@ const ItemCard = ({
 }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const prodUrl = `${slug}/${_id}`
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleImageHover = (index) => {
-        // Switch to the next image if it exists
         if (index < productPictures.length - 1) {
             setCurrentImageIndex(index + 1);
         } else {
-            // Reset to the first image when mouse leaves
             setCurrentImageIndex(0);
         }
     };
@@ -33,7 +35,7 @@ const ItemCard = ({
                     <img
                         src={generatePublicUrl(productPictures[currentImageIndex].img)}
                         onMouseOver={() => handleImageHover(currentImageIndex)}
-                        onMouseLeave={() => setCurrentImageIndex(0)} // Reset to the first image on mouse leave
+                        onMouseLeave={() => setCurrentImageIndex(0)}
                     />
                 </a>
             </div>
@@ -47,7 +49,14 @@ const ItemCard = ({
                     </span>
                 </div>
                 <div className="home-buttons-container">
-                    <Button className="home-button home-add-to-cart-button button">+ Cart</Button>
+                    <Button
+                        className="home-button home-add-to-cart-button button"
+                        onClick={() => {
+                            const img = productPictures[0].img;
+                            dispatch(addToCart({ _id, name, price, img }, quantity));
+                            navigate('/cart');
+                        }}
+                    >+ Cart</Button>
                 </div>
             </div>
         </div>
