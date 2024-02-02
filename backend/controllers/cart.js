@@ -1,21 +1,17 @@
 const Cart = require('../models/cart');
 
 function runUpdate(condition, updateData) {
-
-    return new Promise((resolve, reject) => {
-    
-        Cart.findOneAndUpdate(condition, updateData, { upsert: true })
-          .then((result) => resolve())
-          .catch((err) => reject(err));
-      });
+    return Cart.findOneAndUpdate(condition, updateData, { upsert: true }).exec();
 }
 
 exports.addItemToCart = async (req, res) => {
+    console.log("ADD ITEM TO CART");
     try {
         const existingCart = await Cart.findOne({ user: req.user._id });
+        console.log("existingCart:", existingCart);
         if (existingCart) {
             let promiseArray = [];
-
+            
             req.body.cartItems.forEach((cartItem) => {
                 const product = cartItem.product;
                 const item = existingCart.cartItems.find(c => c.product == product);
@@ -24,9 +20,7 @@ exports.addItemToCart = async (req, res) => {
                     condition = { user: req.user._id, "cartItems.product": product };
                     update = {
                         "$set": {
-                            "cartItems.$": {
-                                ...cartItem
-                            }
+                            "cartItems.$": cartItem,
                         },
                     };
                 } else {
@@ -49,7 +43,7 @@ exports.addItemToCart = async (req, res) => {
                 user: req.user._id,
                 cartItems: req.body.cartItems,
             });
-            
+
             const savedCart = await cart.save();
             if (savedCart) {
                 return res.status(201).json({ cart: savedCart });
@@ -69,7 +63,6 @@ exports.getCartItems = async (req, res) => {
         if (!cart) {
             return res.status(400).json({ error: 'Cart not found' });
         }
-        console.log(cart.cartItems);
         const cartItems = cart.cartItems.map((item) => ({
             _id: item.product._id.toString(),
             name: item.product.name,

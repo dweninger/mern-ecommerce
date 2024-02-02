@@ -23,16 +23,18 @@ const getCartItems = () => {
     };
 };
 
-export const addToCart = (index, product, newQty = 1) => {
-    return async dispatch => {
-        const { cart: {
-            cartItems
-        }, auth } = store.getState();
+export const addToCart = (product, newQty = 1) => {
+    return async (dispatch, getState) => {
+        const { cart: { cartItems }, auth } = store.getState();
 
-        const qty = cartItems[index]
-            ? parseInt(cartItems[index].qty + newQty)
+        const cartArray = Object.values(cartItems);
+        let existingItem = cartArray.find(item => item._id === product._id);
+
+        const qty = existingItem
+            ? parseInt(existingItem.qty + newQty)
             : 1;
-        cartItems[index] = {
+
+        existingItem = {
             ...product,
             qty
         };
@@ -45,21 +47,26 @@ export const addToCart = (index, product, newQty = 1) => {
                     quantity: qty
                 }]
             };
+            console.log("payload", payload);
             const res = await axios.post('/user/cart/addtocart', payload);
             if (res.status === 201) {
                 dispatch(getCartItems());
             }
         } else {
-            localStorage.setItem('cart', JSON.stringify(cartItems));
+            // If not authenticated, update only localStorage
+            const updatedCartItems = {
+                ...cartItems,
+                [product._id]: existingItem
+            };
+            localStorage.setItem('cart', JSON.stringify(updatedCartItems));
         }
-        console.log('addToCart::', cartItems);
 
         dispatch({
             type: cartConstants.ADD_TO_CART_SUCCESS,
-            payload: { cartItems }
+            payload: { cartItems: [existingItem, ...cartArray] }
         });
-    }
-}
+    };
+};
 
 export const updateCart = () => {
     return async dispatch => {

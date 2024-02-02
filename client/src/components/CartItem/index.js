@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import { generatePublicUrl } from '../../urlConfig';
 import QuantityInput from '../QuantityInput';
+import { getCartItems } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CartItem = (props) => {
 
@@ -13,6 +15,11 @@ const CartItem = (props) => {
     const index = props.index;
 
     const [quantity, setQuantity] = useState(qty);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setQuantity(qty);
+    }, [qty]);
 
     const handleQuantityChange = (newQuantity) => {
         setQuantity(newQuantity);

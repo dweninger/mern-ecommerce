@@ -20,6 +20,7 @@ const CartPage = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        
         setCartItems(cart.cartItems);
     }, [cart.cartItems]);
 
@@ -32,7 +33,7 @@ const CartPage = (props) => {
     const onQuantityChange = (index, _id, qty, prevQty) => {
         const { name, price, img } = cartItems[index];
         const addAmt = qty - prevQty;
-        dispatch(addToCart(index, {_id, name, price, img}, addAmt))
+        dispatch(addToCart({_id, name, price, img}, addAmt))
     }
 
     return (

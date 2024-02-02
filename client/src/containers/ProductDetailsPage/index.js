@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetailsById } from '../../actions';
+import { getCartItems, getProductDetailsById, updateCart } from '../../actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import { generatePublicUrl } from '../../urlConfig';
 import QuantityInput from '../../components/QuantityInput';
@@ -33,7 +33,6 @@ const ProductDetailsPage = (props) => {
                 productId
             }
         }
-
         dispatch(getProductDetailsById(payload));
     }, [productId]);
 
@@ -117,7 +116,7 @@ const ProductDetailsPage = (props) => {
                                 onClick={() => {
                                     const { _id, name, price } = product.productDetails;
                                     const img = product.productDetails.productPictures[0].img;
-                                    dispatch(addToCart({ _id, name, price, img }, 1));
+                                    dispatch(addToCart({ _id, name, price, img }, quantity));
                                     navigate('/cart');
                                 }}
                             >
