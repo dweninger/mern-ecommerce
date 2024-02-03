@@ -27,7 +27,7 @@ const AccountDropdown = () => {
 
   const handleHideLoginModal = () => {
     setShowLogin(false);
-};
+  };
 
   const handleShowRegister = () => {
     setShowRegister(true);
@@ -38,7 +38,7 @@ const AccountDropdown = () => {
     dispatch(signout());
     setShowPopover(false);
     navigate('/');
-}
+  }
 
   useEffect(() => {
     if (auth.authenticate) {

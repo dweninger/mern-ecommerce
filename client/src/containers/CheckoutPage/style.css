@@ -1,0 +1,34 @@
+.checkout-options-container {
+    width: 60%;
+    margin-top: 10px;
+}
+
+.collapse-section {
+    width: 85%;
+    margin: auto;
+}
+
+.accordion-button {
+
+    background-color: gray;
+    font-size: 22px;
+    font-weight: 500;
+    outline: none;
+    color: black;
+}
+
+.accordion-button:focus,
+.accordion-button:active {
+    background-color: white !important;
+    color: black !important;
+}
+
+.login-anchor {
+    text-decoration: underline;
+    color: black;
+}
+
+.login-anchor:hover {
+    cursor: pointer;
+    color: #d60000;
+}

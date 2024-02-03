@@ -18,6 +18,7 @@ exports.register = async (req, res) => {
       email,
       hash_password,
       username: shortid.generate(),
+      addresses: [],
     });
 
     const savedUser = await _user.save();

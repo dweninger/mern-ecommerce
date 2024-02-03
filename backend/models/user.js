@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
     profilePicture: {
         type: String
     },
+    addresses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Address',
+    }],
 }, {timestamps: true});
 
 // userSchema.virtual('password')

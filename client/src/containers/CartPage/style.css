@@ -2,4 +2,21 @@
     width: 45%;
     margin-left: 20px;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.place-order-button {
+    background-color: #d60000;
+    border: none;
+    margin-top: 15px;
+    align-self: flex-end;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0.5em 2em;
+}
+
+.place-order-button:hover {
+    background-color: #cc0000;
+    
 }

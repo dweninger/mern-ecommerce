@@ -5,10 +5,8 @@ function runUpdate(condition, updateData) {
 }
 
 exports.addItemToCart = async (req, res) => {
-    console.log("ADD ITEM TO CART");
     try {
         const existingCart = await Cart.findOne({ user: req.user._id });
-        console.log("existingCart:", existingCart);
         if (existingCart) {
             let promiseArray = [];
             

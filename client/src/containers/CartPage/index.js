@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Layout from '../../components/Layout';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CartItem from '../../components/CartItem';
 import { addToCart, getCartItems } from '../../actions';
 
@@ -18,6 +20,7 @@ const CartPage = (props) => {
     // const cartItems = cart.cartItems;
     const [cartItems, setCartItems] = useState(cart.cartItems);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         
@@ -50,6 +53,12 @@ const CartPage = (props) => {
                         />
                     )
                 }
+                <Button
+                    className="place-order-button"
+                    onClick={() => {
+                        navigate('/checkout');
+                    }}
+                >Place Order</Button>
             </div>
         </Layout>
     )

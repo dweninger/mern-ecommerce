@@ -10,6 +10,7 @@ const adminRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
+const userRoutes = require('./routes/user');
 const initialDataRoutes = require('./routes/admin/initialData');
 
 // env
@@ -43,6 +44,7 @@ app.use('/api', adminRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 app.use('/api', cartRoutes);
+app.use('/api', userRoutes);
 app.use('/api', initialDataRoutes);
 
 // Handle React routing, return all requests to React app
