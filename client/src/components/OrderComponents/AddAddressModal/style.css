@@ -1,0 +1,18 @@
+.add-address-group {
+    margin-bottom: 12px;
+}
+
+.address-row {
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 12px;
+}
+
+.add-address-button {
+    background-color: #ff0000;
+    border: none;
+}
+
+.add-address-button:hover {
+    background-color: #cc0000;
+}

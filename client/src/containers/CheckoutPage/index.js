@@ -1,31 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import { Button, Collapse } from 'react-bootstrap';
+import { Accordion, Button, Collapse } from 'react-bootstrap';
 import Layout from '../../components/Layout';
 import LoginModal from '../../components/HeaderComponents/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserAddresses, signout } from '../../actions';
-
-
-/**
- * @author
- * @function CheckoutPage
- */
+import { getCartItems, getUserAddresses, signout } from '../../actions';
+import { FaPlus } from "react-icons/fa";
+import CreditCardForm from '../../components/OrderComponents/CreditCardForm';
+import AddAddressModal from '../../components/OrderComponents/AddAddressModal';
+import AddressForm from '../../components/OrderComponents/AddressForm';
+import CheckoutItem from '../../components/OrderComponents/CheckoutItem';
 
 const CheckoutPage = (props) => {
     const { addresses } = useSelector((state) => state.user);
     const [openLoginModal, setOpenLoginModal] = useState(false);
+    const [openAddressModal, setOpenAddressModal] = useState(false);
     const [openLogin, setOpenLogin] = useState(true);
-    const [openDelivery, setOpenDelivery] = useState(false);
-    const [openPayment, setOpenPayment] = useState(false);
+    const [openDelivery, setOpenDelivery] = useState(true);
+    const [openPayment, setOpenPayment] = useState(true);
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const cart = useSelector(state => state.cart);
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        if (auth.authenticate) {
+            dispatch(getCartItems());
+        }
+    }, [auth.authenticate]);
 
     useEffect(() => {
         dispatch(getUserAddresses());
-      }, [dispatch]);
+    }, [dispatch]);
+
+    useEffect(() => {
+        setCartItems(cart.cartItems);
+    }, [cart.cartItems]);
 
     const userLogout = (e) => {
         dispatch(signout());
@@ -45,76 +57,164 @@ const CheckoutPage = (props) => {
     const renderNonLoggedInText = () => {
         return (
             <div className="collapse-text" id="collapse-text-login">
+                <input
+                    type="text"
+                    placeholder="Email"
+                    className="form-control contact-email-input"
+                />
                 <span>Have an account? </span>
                 <a className="login-anchor" onClick={() => setOpenLoginModal(true)}>Log in</a>
             </div>
         );
     }
 
+    let subtotal = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+        subtotal += cartItems[i].price * cartItems[i].qty;
+    }
+
     return (
         <Layout>
-            <div className="checkout-options-container">
-                <div className="collapse-section">
-                    <Button
-                        onClick={() => setOpenLogin(!openLogin)}
-                        aria-controls="collapse-text-login"
-                        aria-expanded={openLogin}
-                        className="accordion-button"
-                    >
-                        1. Login
-                    </Button>
-                    <Collapse in={openLogin}>
-                        {
-                            auth.authenticate ? renderLoggedInText() : renderNonLoggedInText()
-                        }
+            <div className="checkout-container">
+                <div className="checkout-options-container">
+                    <div className="collapse-section">
+                        <Button
+                            onClick={() => setOpenLogin(!openLogin)}
+                            aria-controls="collapse-text-login"
+                            aria-expanded={openLogin}
+                            className="accordion-button"
+                        >
+                            Contact
+                        </Button>
+                        <Collapse in={openLogin}>
+                            {
+                                auth.authenticate ? renderLoggedInText() : renderNonLoggedInText()
+                            }
 
-                    </Collapse>
-                </div>
-                <div className="collapse-section">
-                    <Button
-                        onClick={() => setOpenDelivery(!openDelivery)}
-                        aria-controls="collapse-text-delivery"
-                        aria-expanded={openDelivery}
-                        className="accordion-button"
-                    >
-                        2. Delivery
-                    </Button>
-                    <Collapse in={openDelivery}>
-                        <div className="collapse-text" id="collapse-text-delivery">
-                            {addresses.map((address, index) =>(
-                                <div key={index}>{address.addressLine1}</div>
-                            ))}
+                        </Collapse>
+                    </div>
+                    <div className="collapse-section">
+                        <Button
+                            onClick={() => setOpenDelivery(!openDelivery)}
+                            aria-controls="collapse-text-delivery"
+                            aria-expanded={openDelivery}
+                            className="accordion-button"
+                        >
+                            Delivery
+                        </Button>
+                        <Collapse in={openDelivery}>
+
+                            <div className="collapse-text" id="collapse-text-delivery">
+                                {auth.authenticate ?
+                                    <div>
+                                        {addresses.map((address, index) => (
+                                            <div key={index} class="form-check checkout-address">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id={index} defaultChecked={index === 0} />
+                                                <label for={index} className="address-info">
+                                                    <div>{address.fullName}</div>
+                                                    <div>
+                                                        {address.addressLine1}
+                                                        {address.addressLine2 && <span> {address.addressLine2}</span>}
+                                                    </div>
+                                                    <div>{address.city}, {address.state} {address.postalCode} {address.country}</div>
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    :
+                                    <AddressForm />
+                                }
+                                {auth.authenticate &&
+                                    <div className="add-address-button">
+                                        <button
+                                            onClick={() => setOpenAddressModal(true)}
+                                        >
+                                            <FaPlus className="plus-icon" /> Add new address
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </Collapse>
+                    </div>
+                    <div className="collapse-section">
+                        <Button
+                            onClick={() => setOpenPayment(!openPayment)}
+                            aria-controls="collapse-text-payment"
+                            aria-expanded={openPayment}
+                            className="accordion-button"
+                        >
+                            Payment
+                        </Button>
+                        <Collapse in={openPayment}>
+                            <div className="collapse-text" id="collapse-text-payment">
+                                <div>All transactions are secure and encrypted.</div>
+                                <Accordion defaultActiveKey="0">
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header>Credit Card</Accordion.Header>
+                                        <Accordion.Body>
+                                            <CreditCardForm />
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                    <Accordion.Item eventKey="1">
+                                        <Accordion.Header>PayPal</Accordion.Header>
+                                        <Accordion.Body>
+
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>
+                        </Collapse>
+                    </div>
+                </div >
+
+                <div class="checkout-order-details">
+                    {
+                        cartItems.length > 0 ?
+                            cartItems.map((cartItem, index) =>
+                                <CheckoutItem
+                                    image={cartItem.img}
+                                    name={cartItem.name}
+                                    price={cartItem.price}
+                                    quantity={cartItem.qty}
+                                />
+                            ) : <p>No items in the cart</p>
+                    }
+                    <div className="checkout-summary-container">
+                        <div className="checkout-summary">
+                            <span>Subtotal</span>
+                            <span>${subtotal.toFixed(2)}</span>
                         </div>
-                    </Collapse>
-                </div>
-                <div className="collapse-section">
-                    <Button
-                        onClick={() => setOpenPayment(!openPayment)}
-                        aria-controls="collapse-text-payment"
-                        aria-expanded={openPayment}
-                        className="accordion-button"
-                    >
-                        3. Payment
-                    </Button>
-                    <Collapse in={openPayment}>
-                        <div className="collapse-text" id="collapse-text-payment">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                            labore wes anderson cred nesciunt sapiente ea proident.
+                        <div className="checkout-summary">
+                            <span>Shipping</span>
+                            <span>$6.99</span>
                         </div>
-                    </Collapse>
+                        <div className="checkout-summary">
+                            <span>Tax</span>
+                            <span>${(subtotal * 0.06).toFixed(2)}</span>
+                        </div>
+                        <div className="checkout-summary">
+                            <span>Toatal</span>
+                            <span>${(subtotal + 6.99 + (subtotal * 0.06)).toFixed(2)}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
             <LoginModal
                 show={openLoginModal}
                 handleHide={() => setOpenLoginModal(false)}
                 modalTitle="Login"
             />
+            <AddAddressModal
+                show={openAddressModal}
+                handleHide={() => setOpenAddressModal(false)}
+                modalTitle="Add Address"
+            />
 
-        </Layout>
+        </Layout >
     )
 
 }
 
-export default CheckoutPage
+export default CheckoutPage;

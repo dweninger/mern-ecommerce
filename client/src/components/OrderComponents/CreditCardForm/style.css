@@ -1,0 +1,11 @@
+.form-control {
+}
+
+.card-input-row:not(:last-of-type) {
+    margin-bottom: 16px;
+}
+
+.card-input-row {
+    width: 85%;
+    margin: 0 auto;
+}

@@ -1,3 +1,8 @@
+.checkout-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .checkout-options-container {
     width: 60%;
     margin-top: 10px;
@@ -8,8 +13,11 @@
     margin: auto;
 }
 
-.accordion-button {
+.collapse-text {
+    padding-left: 30px;
+}
 
+.accordion-button {
     background-color: gray;
     font-size: 22px;
     font-weight: 500;
@@ -23,6 +31,11 @@
     color: black !important;
 }
 
+.contact-email-input {
+    width: 90%;
+    max-width: 18rem;
+}
+
 .login-anchor {
     text-decoration: underline;
     color: black;
@@ -30,5 +43,84 @@
 
 .login-anchor:hover {
     cursor: pointer;
-    color: #d60000;
+    color: #bf1909;
 }
+
+.checkout-address,
+.add-address-button {
+    background-color: ghostwhite;
+}
+
+.checkout-address {
+    padding-left: 35px;
+}
+
+.form-check-input {
+    margin-top: 0.5rem;
+}
+
+.address-info {
+    width: 100%;
+    padding-left: 1rem;
+}
+
+.address-info:hover {
+    cursor: pointer;
+}
+
+.form-check-input:checked + label {
+    background-color: #d4ebff;
+    font-weight: 600;
+}
+
+.add-address-button button {
+    background-color: ghostwhite;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: #bf1909;
+    font-weight: 700;
+    padding: 10px 10px;
+    font-size: 14px;
+}
+
+.plus-icon {
+    margin-right: 24px;
+}
+
+.checkout-order-details {
+    width: 40%;
+    margin-top: 20px;
+}
+
+.checkout-summary-container {
+    margin-top: 8px;
+}
+
+.checkout-summary span:nth-child(2) {
+    float: right;
+    font-weight: 500;
+}
+
+.checkout-summary {
+    margin-right: 50px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    border-bottom: 1px dotted lightgray;
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+      flex-direction: column;
+    }
+  
+    .checkout-options-container {
+      width: 100%;
+    }
+  
+    .checkout-order-details {
+      width: 100%;
+      padding-left: 30px;
+      margin-top: 20px;
+    }
+  }

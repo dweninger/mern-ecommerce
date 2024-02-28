@@ -1,0 +1,8 @@
+.address-row {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.address-row:not(:last-of-type) {
+    margin-bottom: 16px;
+}
