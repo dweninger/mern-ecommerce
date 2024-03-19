@@ -43,3 +43,40 @@ export const getUserAddresses = () => {
         }
     }
 };
+
+export const addAddress = (address) => {
+    return async (dispatch, getState) => {
+
+        dispatch({
+            type: userConstants.ADD_USER_ADDRESSES_REQUEST
+        });
+        const { auth } = getState();
+        const token = auth.token;
+        const userId = auth.user._id;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: {
+                ...address,
+                userId,
+            }
+        };
+
+        const res = await axios.post(`/user/addaddress`, config);
+        if (res.status === 200) {
+            dispatch({
+                type: userConstants.ADD_USER_ADDRESSES_SUCCESS,
+                payload: { address: address }
+            });
+            getUserAddresses();
+        } else {
+            dispatch(
+                {
+                    type: userConstants.ADD_USER_ADDRESSES_FAILURE,
+                    payload: res.message
+                }
+            );
+        }
+    };
+};

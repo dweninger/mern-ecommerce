@@ -3,7 +3,8 @@ const User = require('../models/user');
 
 exports.createAddress = async (req, res) => {
     try {
-        const { fullName, addressLine1, addressLine2, city, state, postalCode, country } = req.body;
+        console.log("CREATING ADDRESS: ", req.body);
+        const { fullName, address, address2, city, state, zip, country, userId } = req.body.body;
         const user = await User.findById(req.user._id);
 
         if (!user) {
@@ -11,16 +12,16 @@ exports.createAddress = async (req, res) => {
         }
 
         const newAddress = new Address({
-            userId: req.user._id,
-            fullName,
-            addressLine1,
-            addressLine2,
-            city,
-            state,
-            postalCode,
-            country,
+            userId: user._id,
+            fullName: fullName,
+            addressLine1: address,
+            addressLine2: address2,
+            city: city,
+            state: state,
+            postalCode: zip,
+            country: country,
         });
-
+        
         const savedAddress = await newAddress.save();
         
         if(user.addresses) {
@@ -34,6 +35,7 @@ exports.createAddress = async (req, res) => {
 
         res.status(201).json(savedAddress);
     } catch (error) {
+        console.log("FAILED TRY IN CREATE ADDRESS");
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }

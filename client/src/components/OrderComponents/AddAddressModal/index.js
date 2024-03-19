@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import AddressForm from '../AddressForm';
 import './style.css';
+import { addAddress } from '../../../actions';
+import { useDispatch } from 'react-redux';
 
 const AddressModal = (props) => {
   const [fullName, setFullName] = useState('');
@@ -11,11 +13,13 @@ const AddressModal = (props) => {
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [country, setCountry] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add any necessary logic for handling the address submission
     props.handleHide();
+    dispatch(addAddress({fullName, address, address2, city, state, zip, country}));
   };
 
   return (

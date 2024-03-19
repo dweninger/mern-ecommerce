@@ -6,7 +6,7 @@ import LoginModal from '../../components/HeaderComponents/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCartItems, getUserAddresses, signout } from '../../actions';
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTrash } from "react-icons/fa";
 import CreditCardForm from '../../components/OrderComponents/CreditCardForm';
 import AddAddressModal from '../../components/OrderComponents/AddAddressModal';
 import AddressForm from '../../components/OrderComponents/AddressForm';
@@ -82,7 +82,7 @@ const CheckoutPage = (props) => {
                             onClick={() => setOpenLogin(!openLogin)}
                             aria-controls="collapse-text-login"
                             aria-expanded={openLogin}
-                            className="accordion-button"
+                            className="accordion-button collapse-section-button"
                         >
                             Contact
                         </Button>
@@ -98,7 +98,7 @@ const CheckoutPage = (props) => {
                             onClick={() => setOpenDelivery(!openDelivery)}
                             aria-controls="collapse-text-delivery"
                             aria-expanded={openDelivery}
-                            className="accordion-button"
+                            className="accordion-button collapse-section-button"
                         >
                             Delivery
                         </Button>
@@ -108,8 +108,8 @@ const CheckoutPage = (props) => {
                                 {auth.authenticate ?
                                     <div>
                                         {addresses.map((address, index) => (
-                                            <div key={index} class="form-check checkout-address">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id={index} defaultChecked={index === 0} />
+                                            <div key={index} className="form-check checkout-address">
+                                                <input className="form-check-input" type="radio" name="flexRadioDefault" id={index} defaultChecked={index === 0} />
                                                 <label for={index} className="address-info">
                                                     <div>{address.fullName}</div>
                                                     <div>
@@ -118,6 +118,7 @@ const CheckoutPage = (props) => {
                                                     </div>
                                                     <div>{address.city}, {address.state} {address.postalCode} {address.country}</div>
                                                 </label>
+                                                <button className="del-address-button btn"><FaTrash /></button>
                                             </div>
                                         ))}
                                     </div>
@@ -141,24 +142,34 @@ const CheckoutPage = (props) => {
                             onClick={() => setOpenPayment(!openPayment)}
                             aria-controls="collapse-text-payment"
                             aria-expanded={openPayment}
-                            className="accordion-button"
+                            className="accordion-button collapse-section-button"
                         >
                             Payment
                         </Button>
                         <Collapse in={openPayment}>
                             <div className="collapse-text" id="collapse-text-payment">
-                                <div>All transactions are secure and encrypted.</div>
+                                <div className="transactions-disclaimer">All transactions are secure and encrypted.</div>
                                 <Accordion defaultActiveKey="0">
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Credit Card</Accordion.Header>
                                         <Accordion.Body>
                                             <CreditCardForm />
+                                            <Button 
+                                                className="pay-now-button"
+                                            >
+                                                Pay With Card
+                                            </Button>
                                         </Accordion.Body>
+
                                     </Accordion.Item>
                                     <Accordion.Item eventKey="1">
                                         <Accordion.Header>PayPal</Accordion.Header>
                                         <Accordion.Body>
-
+                                            <Button
+                                                className="pay-now-button"
+                                            >
+                                                Pay With PayPal
+                                            </Button>
                                         </Accordion.Body>
                                     </Accordion.Item>
                                 </Accordion>
@@ -167,11 +178,12 @@ const CheckoutPage = (props) => {
                     </div>
                 </div >
 
-                <div class="checkout-order-details">
+                <div className="checkout-order-details">
                     {
                         cartItems.length > 0 ?
                             cartItems.map((cartItem, index) =>
                                 <CheckoutItem
+                                    key={cartItem.name}
                                     image={cartItem.img}
                                     name={cartItem.name}
                                     price={cartItem.price}

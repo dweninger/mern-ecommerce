@@ -10,7 +10,7 @@
 
 .collapse-section {
     width: 85%;
-    margin: auto;
+    margin: 1.5rem auto;
 }
 
 .collapse-text {
@@ -18,16 +18,22 @@
 }
 
 .accordion-button {
-    background-color: gray;
+    background-color: lightgray !important;
     font-size: 22px;
     font-weight: 500;
     outline: none;
     color: black;
+    padding: 0.2rem 0.7rem;
+}
+
+.collapse-section-button {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .accordion-button:focus,
-.accordion-button:active {
-    background-color: white !important;
+.accordion-button:active,
+.accordion-button {
     color: black !important;
 }
 
@@ -49,14 +55,20 @@
 .checkout-address,
 .add-address-button {
     background-color: ghostwhite;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin: 0.5em 0;
 }
 
 .checkout-address {
     padding-left: 35px;
+    display: flex;
+    align-items: center;
 }
 
 .form-check-input {
-    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid black;
 }
 
 .address-info {
@@ -75,7 +87,8 @@
 
 .add-address-button button {
     background-color: ghostwhite;
-    border: none;
+    border: 1px solid lightgray;
+    border-radius: 5px;
     width: 100%;
     text-align: left;
     color: #bf1909;
@@ -84,8 +97,30 @@
     font-size: 14px;
 }
 
+.add-address-button button:hover {
+    border: 1px solid gray;
+    color: #d73a29;
+}
+
 .plus-icon {
     margin-right: 24px;
+}
+
+.transactions-disclaimer {
+    margin: 1rem 1rem;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pay-now-button {
+    display: block;
+    margin: 1rem auto;
+    background-color: #bf190a;
+    border: none;
+}
+
+.pay-now-button:hover {
+    background-color: #cc0000;
 }
 
 .checkout-order-details {
