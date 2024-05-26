@@ -7,7 +7,7 @@ exports.createAddress = async (req, res) => {
         const user = await User.findById(req.user._id);
 
         if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(401).json({ error: 'User not found' });
         }
 
         const newAddress = new Address({
@@ -41,17 +41,20 @@ exports.createAddress = async (req, res) => {
 
 exports.removeAddress = async (req, res) => {
     try {
-        const addressIndex = req.params.addressIndex;
-        
+        const addressIndex = req.body.body.index;
         const user = await User.findById(req.user._id);
         if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(401).json({ error: 'User not found' });
         }
 
-        if (addressIndex < 0 || addressIndex >= user.addresses.length) {
+        if (
+            addressIndex === '' || 
+            addressIndex === null || 
+            addressIndex < 0 || 
+            addressIndex >= user.addresses.length
+        ) {
             return res.status(400).json({ error: 'Invalid address index' });
         }
-
         const removedAddress = user.addresses.splice(addressIndex, 1);
         await user.save();
 
@@ -68,7 +71,7 @@ exports.getUserAddresses = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate('addresses');
         if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(401).json({ error: 'User not found' });
         }
 
         const userAddresses = user.addresses || [];

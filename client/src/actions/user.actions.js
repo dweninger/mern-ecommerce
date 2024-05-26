@@ -62,19 +62,19 @@ export const addAddress = (address) => {
                 userId,
             }
         };
-
-        const res = await axios.post(`/user/addaddress`, config);
-        if (res.status === 200) {
-            dispatch({
-                type: userConstants.ADD_USER_ADDRESSES_SUCCESS,
-                payload: { address: address }
-            });
-            dispatch(getUserAddresses());
-        } else {
+        try {
+            const res = await axios.post(`/user/addaddress`, config);
+            if (res.status === 200) {
+                dispatch({
+                    type: userConstants.ADD_USER_ADDRESSES_SUCCESS,
+                    payload: { address: address }
+                });
+            }
+        } catch (error) {
             dispatch(
                 {
                     type: userConstants.ADD_USER_ADDRESSES_FAILURE,
-                    payload: res.message
+                    payload: error.response.data.message
                 }
             );
         }
@@ -98,19 +98,19 @@ export const deleteAddress = (index) => {
                 index
             }
         };
-
-        const res = await axios.post(`/user/deleteaddress`, config);
-        if (res.status === 200) {
-            dispatch({
-                type: userConstants.DELETE_USER_ADDRESS_SUCCESS,
-                payload: res.message
-            });
-            dispatch(getUserAddresses());
-        } else {
+        try {
+            const res = await axios.post(`/user/deleteaddress`, config);
+            if (res.status === 200) {
+                dispatch({
+                    type: userConstants.DELETE_USER_ADDRESS_SUCCESS,
+                    payload: res.message
+                });
+            }
+        } catch (error) {
             dispatch(
                 {
                     type: userConstants.DELETE_USER_ADDRESS_FAILURE,
-                    payload: res.message
+                    payload: error
                 }
             );
         }

@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         loading: true,
       };
     case userConstants.GET_USER_ADDRESSES_SUCCESS:
-      case userConstants.ADD_USER_ADDRESSES_SUCCESS:
+    case userConstants.ADD_USER_ADDRESSES_SUCCESS:
     case userConstants.DELETE_USER_ADDRESS_SUCCESS:
       return {
         ...state,
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         error: '',
       };
     case userConstants.GET_USER_ADDRESSES_FAILURE:
-      case userConstants.ADD_USER_ADDRESSES_FAILURE:
+    case userConstants.ADD_USER_ADDRESSES_FAILURE:
     case userConstants.DELETE_USER_ADDRESS_FAILURE:
       return {
         ...state,

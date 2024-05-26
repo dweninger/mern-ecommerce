@@ -13,7 +13,7 @@ import AddressForm from '../../components/OrderComponents/AddressForm';
 import CheckoutItem from '../../components/OrderComponents/CheckoutItem';
 
 const CheckoutPage = (props) => {
-    const { addresses } = useSelector((state) => state.user);
+    const user = useSelector(state => state.user);
     const [openLoginModal, setOpenLoginModal] = useState(false);
     const [openAddressModal, setOpenAddressModal] = useState(false);
     const [openLogin, setOpenLogin] = useState(true);
@@ -28,16 +28,17 @@ const CheckoutPage = (props) => {
     useEffect(() => {
         if (auth.authenticate) {
             dispatch(getCartItems());
+            dispatch(getUserAddresses());
         }
     }, [auth.authenticate]);
 
     useEffect(() => {
-        dispatch(getUserAddresses());
-    }, [dispatch]);
-
-    useEffect(() => {
         setCartItems(cart.cartItems);
     }, [cart.cartItems]);
+
+    useEffect(() => {
+        dispatch(getUserAddresses());
+    }, [user.addresses]);
 
     const userLogout = (e) => {
         dispatch(signout());
@@ -110,7 +111,7 @@ const CheckoutPage = (props) => {
                             <div className="collapse-text" id="collapse-text-delivery">
                                 {auth.authenticate ?
                                     <div>
-                                        {addresses.map((address, index) => (
+                                        {user.addresses && user.addresses.map((address, index) => (
                                             <div key={index} className="form-check checkout-address">
                                                 <input className="form-check-input" type="radio" name="flexRadioDefault" id={index} defaultChecked={index === 0} />
                                                 <label for={index} className="address-info">
