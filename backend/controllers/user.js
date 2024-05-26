@@ -3,7 +3,6 @@ const User = require('../models/user');
 
 exports.createAddress = async (req, res) => {
     try {
-        console.log("CREATING ADDRESS: ", req.body);
         const { fullName, address, address2, city, state, zip, country, userId } = req.body.body;
         const user = await User.findById(req.user._id);
 
@@ -33,13 +32,37 @@ exports.createAddress = async (req, res) => {
         
         await user.save();
 
-        res.status(201).json(savedAddress);
+        res.status(201).json(user.addresses);
     } catch (error) {
-        console.log("FAILED TRY IN CREATE ADDRESS");
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+exports.removeAddress = async (req, res) => {
+    try {
+        const addressIndex = req.params.addressIndex;
+        
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        if (addressIndex < 0 || addressIndex >= user.addresses.length) {
+            return res.status(400).json({ error: 'Invalid address index' });
+        }
+
+        const removedAddress = user.addresses.splice(addressIndex, 1);
+        await user.save();
+
+        await Address.findByIdAndDelete(removedAddress);
+
+        res.status(200).json(user.addresses);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 exports.getUserAddresses = async (req, res) => {
     try {

@@ -13,6 +13,7 @@ const LoginModal = (props) => {
     const [showLogin, setShowLogin] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginAttempted, setLoginAttempted] = useState(false);
     const auth = useSelector(state => state.auth);
 
     const dispatch = useDispatch();
@@ -23,16 +24,21 @@ const LoginModal = (props) => {
             email, password,
         }
         setShowLogin(false);
-
+        setLoginAttempted(true);
         dispatch(login(user));
-        props.handleHide();
     }
 
     useEffect(() => {
-        if(auth.authenticate) {
-            
+        if (loginAttempted) {
+            if (auth.authenticate) {
+                props.handleHide();
+            } else if (auth.error) {
+                alert("Login credentials incorrect.");
+                console.log(auth.error);
+                setLoginAttempted(false);
+            }
         }
-    }, [auth.authenticate]);
+    }, [auth.authenticate, auth.error]);
 
     return (
         <Modal className="login-modal" size={props.size} show={props.show} onHide={props.handleHide}>

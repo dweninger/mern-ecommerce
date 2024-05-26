@@ -5,7 +5,7 @@ import Layout from '../../components/Layout';
 import LoginModal from '../../components/HeaderComponents/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCartItems, getUserAddresses, signout } from '../../actions';
+import { getCartItems, getUserAddresses, signout, addAddress, deleteAddress } from '../../actions';
 import { FaPlus, FaTrash } from "react-icons/fa";
 import CreditCardForm from '../../components/OrderComponents/CreditCardForm';
 import AddAddressModal from '../../components/OrderComponents/AddAddressModal';
@@ -51,7 +51,6 @@ const CheckoutPage = (props) => {
                 <a className="login-anchor" onClick={userLogout}>Log out</a>
             </div>
         );
-
     }
 
     const renderNonLoggedInText = () => {
@@ -66,6 +65,10 @@ const CheckoutPage = (props) => {
                 <a className="login-anchor" onClick={() => setOpenLoginModal(true)}>Log in</a>
             </div>
         );
+    }
+
+    const delAddress = (index) => {
+        dispatch(deleteAddress(index));
     }
 
     let subtotal = 0;
@@ -118,7 +121,12 @@ const CheckoutPage = (props) => {
                                                     </div>
                                                     <div>{address.city}, {address.state} {address.postalCode} {address.country}</div>
                                                 </label>
-                                                <button className="del-address-button btn"><FaTrash /></button>
+                                                <button
+                                                    onClick={() => delAddress(index)}
+                                                    className="del-address-button btn"
+                                                >
+                                                    <FaTrash />
+                                                </button>
                                             </div>
                                         ))}
                                     </div>

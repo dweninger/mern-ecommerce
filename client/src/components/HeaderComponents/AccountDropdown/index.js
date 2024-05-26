@@ -88,8 +88,7 @@ const AccountDropdown = () => {
         overlay={popover}
         show={showPopover}
         rootClose
-        arrowProps={{ arrowRef: null, style: {}, placement: '' }}
-        hasDoneInitialMeasure={false}
+        hasdoneinitialmeasure={false}
       >
         <Button
           variant="light"

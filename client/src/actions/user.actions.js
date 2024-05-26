@@ -69,7 +69,7 @@ export const addAddress = (address) => {
                 type: userConstants.ADD_USER_ADDRESSES_SUCCESS,
                 payload: { address: address }
             });
-            getUserAddresses();
+            dispatch(getUserAddresses());
         } else {
             dispatch(
                 {
@@ -80,3 +80,39 @@ export const addAddress = (address) => {
         }
     };
 };
+
+export const deleteAddress = (index) => {
+    return async (dispatch, getState) => {
+
+        dispatch({
+            type: userConstants.DELETE_USER_ADDRESS_REQUEST,
+        });
+
+        const token = store.getState().auth.token;
+        
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: {
+                index
+            }
+        };
+
+        const res = await axios.post(`/user/deleteaddress`, config);
+        if (res.status === 200) {
+            dispatch({
+                type: userConstants.DELETE_USER_ADDRESS_SUCCESS,
+                payload: res.message
+            });
+            dispatch(getUserAddresses());
+        } else {
+            dispatch(
+                {
+                    type: userConstants.DELETE_USER_ADDRESS_FAILURE,
+                    payload: res.message
+                }
+            );
+        }
+    };
+}

@@ -4,28 +4,34 @@ import { authConstants, cartConstants } from "./constants";
 export const login = (user) => {
 
     return async (dispatch) => {
-
         dispatch({ type: authConstants.LOGIN_REQUEST });
 
-        const res = await axios.post('/login', {
-            ...user
-        });
-
-        if (res.status === 200) {
-            const { token, user } = res.data;
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-            dispatch({
-                type: authConstants.LOGIN_SUCCESS,
-                payload: {
-                    token, user
-                }
+        try {
+            const res = await axios.post('/login', {
+                ...user
             });
-        } else {
-            if (res.status === 400) {
+
+            if (res.status === 200) {
+                const { token, user } = res.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user));
+                dispatch({
+                    type: authConstants.LOGIN_SUCCESS,
+                    payload: {
+                        token, user
+                    }
+                });
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
                 dispatch({
                     type: authConstants.LOGIN_FAILURE,
-                    payload: { error: res.data.error }
+                    payload: { error: error.response.data.message }
+                });
+            } else {
+                dispatch({
+                    type: authConstants.LOGIN_FAILURE,
+                    payload: {error: 'An unexpected error occured while loggin in.'}
                 });
             }
         }
@@ -46,7 +52,7 @@ export const isUserLoggedIn = () => {
         } else {
             dispatch({
                 type: authConstants.LOGIN_FAILURE,
-                payload: { error: 'Failed to login' }
+                payload: { error: null }
             });
         }
     }
