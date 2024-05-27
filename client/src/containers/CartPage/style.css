@@ -17,6 +17,24 @@
     text-decoration-line: underline;
 }
 
+.cart-subtotal-container {
+    text-align: center;
+    /* margin-right: 4rem; */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cart-subtotal-title {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.cart-subtotal {
+    font-size: 17px;
+    font-weight: 600;
+}
+
 .place-order-button {
     background-color: #d60000;
     border: none;

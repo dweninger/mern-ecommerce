@@ -5,7 +5,7 @@ import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CartItem from '../../components/CartItem';
-import { addToCart, getCartItems } from '../../actions';
+import { addToCart, removeFromCart, getCartItems } from '../../actions';
 
 
 /**
@@ -36,8 +36,19 @@ const CartPage = (props) => {
     const onQuantityChange = (index, _id, qty, prevQty) => {
         const { name, price, img } = cartItems[index];
         const addAmt = qty - prevQty;
-        dispatch(addToCart({_id, name, price, img}, addAmt))
+        dispatch(addToCart({_id, name, price, img}, addAmt));
     }
+
+    const onRemoveItem = (index, _id) => {
+        const { name, price, img } = cartItems[index];
+        dispatch(removeFromCart({_id, name, price, img}));
+    }
+
+    let subtotal = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+        subtotal += cartItems[i].price * cartItems[i].qty;
+    }
+    subtotal = subtotal.toFixed(2);
 
     return (
         <Layout>
@@ -51,9 +62,14 @@ const CartPage = (props) => {
                             cartItem={cartItems[key]}
                             id={cartItems[key]._id}
                             onQuantityChange={onQuantityChange}
+                            onRemoveItem={onRemoveItem}
                         />
                     )
                 }
+                <div className="cart-subtotal-container">
+                    <div className="cart-subtotal-title">Subtotal:</div>
+                    <div className="cart-subtotal">${subtotal}</div>
+                </div>
                 <Button
                     className="place-order-button"
                     onClick={() => {

@@ -50,7 +50,12 @@ const CartItem = (props) => {
                             quantity={qty}
                             onChange={handleQuantityChange}
                         />
-                        <button className="btn btn-outline-danger cart-remove-btn">Remove</button>
+                        <button 
+                            className="btn btn-outline-danger cart-remove-btn"
+                            onClick={() => props.onRemoveItem(index, _id)}
+                        >
+                            Remove
+                        </button>
                     </div>
                 </div>
             </div>

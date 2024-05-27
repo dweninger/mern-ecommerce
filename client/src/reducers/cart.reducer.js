@@ -36,6 +36,26 @@ export default (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+        case cartConstants.REMOVE_FROM_CART_REQUEST:
+            state = {
+                ...state,
+                updatingCart: true
+            }
+            break;
+        case cartConstants.REMOVE_FROM_CART_SUCCESS:
+            state = {
+                ...state,
+                cartItems: action.payload.cartItems,
+                updatingCart: false
+            }
+            break;
+        case cartConstants.REMOVE_FROM_CART_FAILURE:
+            state = {
+                ...state,
+                updatingCart: false,
+                error: action.payload.error
+            }
+            break;    
         case cartConstants.RESET_CART:
             state = {
                 ...initState

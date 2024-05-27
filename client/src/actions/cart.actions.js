@@ -39,7 +39,6 @@ export const addToCart = (product, newQty = 1) => {
             updatedCartItems = [...cartArray];
         } else {
             // If the product does not exist, add it to the cart
-            console.log(newQty);
             updatedCartItems = [...cartArray, { ...product, qty: newQty }];
         }
 
@@ -77,6 +76,60 @@ export const addToCart = (product, newQty = 1) => {
 
             dispatch({
                 type: cartConstants.ADD_TO_CART_SUCCESS,
+                payload: { cartItems: updatedCartItemsObj }
+            });
+        }
+    };
+};
+
+export const removeFromCart = (product) => {
+    return async (dispatch, getState) => {
+        const { cart: { cartItems }, auth } = getState();
+
+        // Convert cartItems from object to array
+        const cartArray = Object.values(cartItems);
+
+        // Check if the product already exists in the cart
+        const existingItemIndex = cartArray.findIndex(item => item._id === product._id);
+
+        if (existingItemIndex !== -1) {
+            // If the product exists, remove it
+            cartArray.splice(existingItemIndex, 1);
+        } else {
+            // Throw error
+        }
+
+        const updatedCartItemsObj = cartArray.reduce((acc, item, index) => {
+            acc[index] = item;
+            return acc;
+        }, {});
+
+        if (auth.authenticate) {
+            dispatch({ type: cartConstants.REMOVE_FROM_CART_REQUEST });
+            const payload = {
+                cartItems: cartArray
+            };
+            try {
+                const res = await axios.post('/user/cart/removefromcart', payload);
+                if (res.status === 201) {
+                    dispatch(getCartItems());
+                    dispatch({
+                        type: cartConstants.REMOVE_FROM_CART_SUCCESS,
+                        payload: { cartItems: cartArray }
+                    });
+                }
+            } catch (error) {
+                dispatch({
+                    type: cartConstants.REMOVE_FROM_CART_FAILURE,
+                    payload: { error: error.response.data.message }
+                });
+            }
+        } else {
+            // If not authenticated, update only localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedCartItemsObj));
+
+            dispatch({
+                type: cartConstants.REMOVE_FROM_CART_SUCCESS,
                 payload: { cartItems: updatedCartItemsObj }
             });
         }
