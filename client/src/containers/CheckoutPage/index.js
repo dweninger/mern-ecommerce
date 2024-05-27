@@ -72,6 +72,10 @@ const CheckoutPage = (props) => {
         dispatch(deleteAddress(index));
     }
 
+    const placeOrderWithCard = () => {
+
+    }
+
     let subtotal = 0;
     for (let i = 0; i < cartItems.length; i++) {
         subtotal += cartItems[i].price * cartItems[i].qty;
@@ -165,22 +169,23 @@ const CheckoutPage = (props) => {
                                             <CreditCardForm />
                                             <Button 
                                                 className="pay-now-button"
+                                                onClick={() => placeOrderWithCard()}
                                             >
-                                                Pay With Card
+                                                Place Order
                                             </Button>
                                         </Accordion.Body>
 
                                     </Accordion.Item>
-                                    <Accordion.Item eventKey="1">
+                                    {/* <Accordion.Item eventKey="1">
                                         <Accordion.Header>PayPal</Accordion.Header>
                                         <Accordion.Body>
                                             <Button
                                                 className="pay-now-button"
                                             >
-                                                Pay With PayPal
+                                                Place Order With PayPal
                                             </Button>
                                         </Accordion.Body>
-                                    </Accordion.Item>
+                                    </Accordion.Item> */}
                                 </Accordion>
                             </div>
                         </Collapse>

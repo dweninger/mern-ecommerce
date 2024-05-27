@@ -24,45 +24,62 @@ const getCartItems = () => {
 
 export const addToCart = (product, newQty = 1) => {
     return async (dispatch, getState) => {
-        const { cart: { cartItems }, auth } = store.getState();
+        const { cart: { cartItems }, auth } = getState();
 
+        // Convert cartItems from object to array
         const cartArray = Object.values(cartItems);
-        let existingItem = cartArray.find(item => item._id === product._id);
 
-        const qty = existingItem
-            ? parseInt(existingItem.qty + newQty)
-            : 1;
+        // Check if the product already exists in the cart
+        const existingItemIndex = cartArray.findIndex(item => item._id === product._id);
 
-        existingItem = {
-            ...product,
-            qty
-        };
+        let updatedCartItems;
+        if (existingItemIndex !== -1) {
+            // If the product exists, update the quantity
+            cartArray[existingItemIndex].qty += newQty;
+            updatedCartItems = [...cartArray];
+        } else {
+            // If the product does not exist, add it to the cart
+            console.log(newQty);
+            updatedCartItems = [...cartArray, { ...product, qty: newQty }];
+        }
 
         if (auth.authenticate) {
             dispatch({ type: cartConstants.ADD_TO_CART_REQUEST });
             const payload = {
-                cartItems: [{
-                    product: product._id,
-                    quantity: qty
-                }]
+                cartItems: updatedCartItems.map(item => ({
+                    product: item._id,
+                    quantity: item.qty
+                }))
             };
-            const res = await axios.post('/user/cart/addtocart', payload);
-            if (res.status === 201) {
-                dispatch(getCartItems());
+            try {
+                const res = await axios.post('/user/cart/addtocart', payload);
+                if (res.status === 201) {
+                    dispatch(getCartItems());
+                    dispatch({
+                        type: cartConstants.ADD_TO_CART_SUCCESS,
+                        payload: { cartItems: updatedCartItems }
+                    });
+                }
+            } catch (error) {
+                dispatch({
+                    type: cartConstants.ADD_TO_CART_FAILURE,
+                    payload: { error: error.response.data.message }
+                });
             }
         } else {
             // If not authenticated, update only localStorage
-            const updatedCartItems = {
-                ...cartItems,
-                [product._id]: existingItem
-            };
-            localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-        }
+            const updatedCartItemsObj = updatedCartItems.reduce((acc, item, index) => {
+                acc[index] = item;
+                return acc;
+            }, {});
 
-        dispatch({
-            type: cartConstants.ADD_TO_CART_SUCCESS,
-            payload: { cartItems: [existingItem, ...cartArray] }
-        });
+            localStorage.setItem('cart', JSON.stringify(updatedCartItemsObj));
+
+            dispatch({
+                type: cartConstants.ADD_TO_CART_SUCCESS,
+                payload: { cartItems: updatedCartItemsObj }
+            });
+        }
     };
 };
 

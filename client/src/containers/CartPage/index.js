@@ -42,6 +42,7 @@ const CartPage = (props) => {
     return (
         <Layout>
             <div className="cart-items-container">
+                <div className="cart-items-header">Cart Items</div>
                 {
                     Object.keys(cartItems).map((key, index) =>
                         <CartItem

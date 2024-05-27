@@ -53,7 +53,7 @@ const ItemCard = ({
                         className="home-button home-add-to-cart-button button"
                         onClick={() => {
                             const img = productPictures[0].img;
-                            dispatch(addToCart({ _id, name, price, img }, quantity));
+                            dispatch(addToCart({ _id, name, price, img }, 1));
                             navigate('/cart');
                         }}
                     >+ Cart</Button>

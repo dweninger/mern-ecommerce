@@ -1,16 +1,27 @@
 .cart-items-container {
     width: 45%;
-    margin-left: 20px;
+    margin: 0 auto;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
+    border: 1px solid lightslategray;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.cart-items-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration-line: underline;
 }
 
 .place-order-button {
     background-color: #d60000;
     border: none;
     margin-top: 15px;
-    align-self: flex-end;
+    align-self: center;
     font-size: 18px;
     font-weight: 500;
     padding: 0.5em 2em;
@@ -18,5 +29,4 @@
 
 .place-order-button:hover {
     background-color: #cc0000;
-    
 }
