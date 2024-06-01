@@ -1,7 +1,8 @@
 import { orderConstants } from "../actions/constants";
 
 const initState = {
-    orderItems: [],
+    orderId: '',
+    orderTotal: 0.00,
     updatingOrder: false,
     error: null
 };
@@ -17,7 +18,8 @@ export default (state = initState, action) => {
         case orderConstants.SUBMIT_ORDER_SUCCESS:
             state = {
                 ...state,
-                orderItems: action.payload.orderItems,
+                orderId: action.payload.orderId,
+                orderTotal: action.payload.orderTotal,
                 updatingOrder: false
             }
             break;

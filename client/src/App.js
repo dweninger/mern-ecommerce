@@ -6,6 +6,7 @@ import ProductListPage from './containers/ProductListPage';
 import ProductDetailsPage from './containers/ProductDetailsPage';
 import CartPage from './containers/CartPage';
 import CheckoutPage from './containers/CheckoutPage';
+import OrderConfirmationPage from './containers/OrderConfirmationPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartItems, isUserLoggedIn, updateCart } from './actions';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/:productSlug/:productId" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
         </Routes>
       </Router>
     </div>

@@ -1,15 +1,7 @@
 import { cartConstants } from "../actions/constants";
 
 const initState = {
-    cartItems: {
-        // 123: {
-        //     _id: 123,
-        //     name: 'Carcassone',
-        //     img: 'some.jpg',
-        //     price: 500,
-        //     qty: 1,
-        // }
-    },
+    cartItems: {},
     updatingCart: false,
     error: null
 };

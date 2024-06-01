@@ -1,9 +1,9 @@
-import { orderConstants } from "./constants";
+import { orderConstants, cartConstants } from "./constants";
 import axios from "../helpers/axios";
 
 export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetails) => {
     return async (dispatch, getState) => {
-        const { auth } = getState();
+        const { auth, cart } = getState();
 
         let order = {
             address: address,
@@ -32,10 +32,12 @@ export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetai
         try {
             const res = await axios.post('/order/submitorder', order);
             if (res.status === 201) {
+                console.log(res);
                 dispatch({
                     type: orderConstants.SUBMIT_ORDER_SUCCESS,
-                    payload: order
+                    payload: {orderId: res.data.order._id, orderTotal: order.orderTotal}
                 });
+                dispatch(clearCart());
             }
         } catch (error) {
             dispatch({
@@ -45,3 +47,9 @@ export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetai
         }
     } 
 };
+
+export const clearCart = () => {
+    return async (dispatch) => {
+        dispatch({ type: cartConstants.RESET_CART });
+    }
+}

@@ -135,7 +135,10 @@ const CheckoutPage = (props) => {
                 fullAddress = {...selectedAddress};
             }
             const orderTotal = (subtotal + 6.99 + (subtotal * 0.06)).toFixed(2);
-            dispatch(submitOrder(guest, fullAddress, cartItems, orderTotal, creditCard))
+
+
+            dispatch(submitOrder(guest, fullAddress, cartItems, orderTotal, creditCard));
+            navigate('/order-confirmation');
         } else {
             console.log("ORDER INVALID");
         }
