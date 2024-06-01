@@ -34,7 +34,6 @@ const LoginModal = (props) => {
                 props.handleHide();
             } else if (auth.error) {
                 alert("Login credentials incorrect.");
-                console.log(auth.error);
                 setLoginAttempted(false);
             }
         }

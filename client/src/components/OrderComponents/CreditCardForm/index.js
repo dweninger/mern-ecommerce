@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import React from 'react';
 import './style.css';
 
-const CreditCardForm = () => {
-    const [cardNumber, setCardNumber] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [cvv, setCvv] = useState('');
-    const [cardName, setCardName] = useState('');
-
+const CreditCardForm = ({creditCard, setCreditCard}) => {
     const handleCardNumberChange = (e) => {
         const inputValue = e.target.value.replace(/\D/g, '').substring(0, 16);
         const formattedValue = inputValue.replace(/(\d{4})(?=\d)/g, '$1 ');
-        setCardNumber(formattedValue);
+        setCreditCard({...creditCard, cardNumber: formattedValue});
     };
 
     const handleExpiryDateChange = (e) => {
         const inputValue = e.target.value.replace(/\D/g, '').substring(0, 4);
         const formattedValue = inputValue.replace(/^(\d{2})/, '$1/');
-        setExpiryDate(formattedValue);
+        setCreditCard({...creditCard, expiryDate: formattedValue});
     };
 
     const handleCvvChange = (e) => {
         const inputValue = e.target.value.replace(/\D/g, '').substring(0, 3);
-        setCvv(inputValue);
+        setCreditCard({...creditCard, cvv: inputValue});
     };
 
     const handleCardNameChange = (e) => {
         const inputValue = e.target.value.replace(/[^a-zA-Z\s]/g, '').substring(0, 50);
-        setCardName(inputValue);
+        setCreditCard({...creditCard, cardName: inputValue});
     };
 
     return (
@@ -36,7 +30,7 @@ const CreditCardForm = () => {
                 <div className='col md-6'>
                     <input
                         type="text"
-                        value={cardNumber}
+                        value={creditCard.cardNumber}
                         onChange={handleCardNumberChange}
                         placeholder="Enter card number"
                         className="form-control"
@@ -47,7 +41,7 @@ const CreditCardForm = () => {
                 <div className='col md-4'>
                     <input
                         type="text"
-                        value={expiryDate}
+                        value={creditCard.expiryDate}
                         onChange={handleExpiryDateChange}
                         placeholder="MM/YY"
                         className="form-control"
@@ -56,7 +50,7 @@ const CreditCardForm = () => {
                 <div className='col md-2'>
                     <input
                         type="text"
-                        value={cvv}
+                        value={creditCard.cvv}
                         onChange={handleCvvChange}
                         placeholder="CVV"
                         className="form-control"
@@ -67,7 +61,7 @@ const CreditCardForm = () => {
                 <div className='col md-6'>
                     <input
                         type="text"
-                        value={cardName}
+                        value={creditCard.cardName}
                         onChange={handleCardNameChange}
                         placeholder="Name on card"
                         className="form-control"

@@ -17,13 +17,12 @@ const CartPage = (props) => {
 
     const cart = useSelector(state => state.cart);
     const auth = useSelector(state => state.auth);
-    // const cartItems = cart.cartItems;
     const [cartItems, setCartItems] = useState(cart.cartItems);
+    const [subtotal, setSubtotal] = useState(0.00);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        
         setCartItems(cart.cartItems);
     }, [cart.cartItems]);
 
@@ -44,12 +43,19 @@ const CartPage = (props) => {
         dispatch(removeFromCart({_id, name, price, img}));
     }
 
-    let subtotal = 0;
-    for (let i = 0; i < cartItems.length; i++) {
-        subtotal += cartItems[i].price * cartItems[i].qty;
-    }
-    subtotal = subtotal.toFixed(2);
+    useEffect(() =>{
+        calculateSubtotal();
+    }, [cartItems]);
 
+    const calculateSubtotal = () => {
+        let subtotal = 0;
+        for (let i = 0; i < Object.values(cartItems).length; i++) {
+            subtotal += cartItems[i].price * cartItems[i].qty;
+        }
+        subtotal = subtotal.toFixed(2);
+        setSubtotal(subtotal);
+    }
+    
     return (
         <Layout>
             <div className="cart-items-container">

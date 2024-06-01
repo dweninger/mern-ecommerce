@@ -47,7 +47,6 @@ exports.addItemToCart = async (req, res) => {
             }
         }
     } catch (error) {
-        console.log("Controllers add cart error");
         return res.status(400).json({ error: error.message });
     }
 };

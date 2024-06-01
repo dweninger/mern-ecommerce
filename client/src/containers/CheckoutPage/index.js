@@ -5,7 +5,7 @@ import Layout from '../../components/Layout';
 import LoginModal from '../../components/HeaderComponents/LoginModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCartItems, getUserAddresses, signout, addAddress, deleteAddress } from '../../actions';
+import { getCartItems, getUserAddresses, signout, addAddress, deleteAddress, submitOrder } from '../../actions';
 import { FaPlus, FaTrash } from "react-icons/fa";
 import CreditCardForm from '../../components/OrderComponents/CreditCardForm';
 import AddAddressModal from '../../components/OrderComponents/AddAddressModal';
@@ -24,6 +24,23 @@ const CheckoutPage = (props) => {
     const navigate = useNavigate();
     const cart = useSelector(state => state.cart);
     const [cartItems, setCartItems] = useState([]);
+    const [email, setEmail] = useState('');
+    const [creditCard, setCreditCard] = useState({
+        cardNumber: '',
+        expiryDate: '',
+        cvv: '',
+        cardName: ''
+    });
+    const [selectedAddress, setSelectedAddress] = useState(null);
+    const [guestAddress, setGuestAddress] = useState({
+        fullName: '',
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: ''
+    });
 
     useEffect(() => {
         if (auth.authenticate) {
@@ -33,11 +50,13 @@ const CheckoutPage = (props) => {
     }, [auth.authenticate]);
 
     useEffect(() => {
-        setCartItems(cart.cartItems);
+        setCartItems(Object.values(cart.cartItems));
     }, [cart.cartItems]);
 
     useEffect(() => {
-        dispatch(getUserAddresses());
+        if (auth.authenticate) {
+            dispatch(getUserAddresses());
+        }
     }, [user.addresses]);
 
     const userLogout = (e) => {
@@ -58,9 +77,12 @@ const CheckoutPage = (props) => {
         return (
             <div className="collapse-text" id="collapse-text-login">
                 <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
+                    id="contact-email-input"
                     className="form-control contact-email-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <span>Have an account? </span>
                 <a className="login-anchor" onClick={() => setOpenLoginModal(true)}>Log in</a>
@@ -72,8 +94,51 @@ const CheckoutPage = (props) => {
         dispatch(deleteAddress(index));
     }
 
-    const placeOrderWithCard = () => {
+    const validateOrder = () => {
+        if (auth.authenticate) {
+            if(user.addresses.length === 0) {
+                alert("Please add an address to your account before placing an order.");
+                return false;
+            } 
+        } else {
+            if (email === "") {
+                alert("Please enter an email address before placing an order.");
+                return false;
+            }
+            if (!guestAddress.fullName || !guestAddress.addressLine1 || !guestAddress.city || !guestAddress.state || !guestAddress.zip || !guestAddress.country) {
+                alert("Please fill in all address details.");
+                return false;
+            }
+        }
 
+        if (!creditCard.cardName || !creditCard.cardNumber || !creditCard.cvv || !creditCard.expiryDate) {
+            alert("Please enter credit card details before placing an order.");
+            return false;
+        }
+        return true;
+    }
+
+    const placeOrderWithCard = () => {
+        if (validateOrder()) {
+            let guest = {};
+            let fullAddress = {};
+
+            if (!user.authenticate) {
+                fullAddress = {
+                    ...guestAddress
+                };
+                guest = {
+                    fullName: creditCard.cardName,
+                    email: email,
+                };
+            } else {
+                fullAddress = {...selectedAddress};
+            }
+            const orderTotal = (subtotal + 6.99 + (subtotal * 0.06)).toFixed(2);
+            dispatch(submitOrder(guest, fullAddress, cartItems, orderTotal, creditCard))
+        } else {
+            console.log("ORDER INVALID");
+        }
     }
 
     let subtotal = 0;
@@ -117,7 +182,7 @@ const CheckoutPage = (props) => {
                                     <div>
                                         {user.addresses && user.addresses.map((address, index) => (
                                             <div key={index} className="form-check checkout-address">
-                                                <input className="form-check-input" type="radio" name="flexRadioDefault" id={index} defaultChecked={index === 0} />
+                                                <input className="form-check-input" type="radio" name="flexRadioDefault" id={index} onClick={() => setSelectedAddress(address)} defaultChecked={index === 0} />
                                                 <label for={index} className="address-info">
                                                     <div>{address.fullName}</div>
                                                     <div>
@@ -136,7 +201,10 @@ const CheckoutPage = (props) => {
                                         ))}
                                     </div>
                                     :
-                                    <AddressForm />
+                                    <AddressForm 
+                                        guestAddress={guestAddress}
+                                        setGuestAddress={setGuestAddress}
+                                    />
                                 }
                                 {auth.authenticate &&
                                     <div className="add-address-button">
@@ -166,7 +234,10 @@ const CheckoutPage = (props) => {
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header>Credit Card</Accordion.Header>
                                         <Accordion.Body>
-                                            <CreditCardForm />
+                                            <CreditCardForm 
+                                                creditCard={creditCard}
+                                                setCreditCard={setCreditCard}
+                                            />
                                             <Button 
                                                 className="pay-now-button"
                                                 onClick={() => placeOrderWithCard()}

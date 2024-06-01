@@ -20,7 +20,7 @@ const CheckoutItem = ({
             </div>
             <div className="checkout-name-price">
                 <div className="checkout-item-name">{name}</div>
-                <div className="checkout-item-price"> ${price * quantity}</div>
+                <div className="checkout-item-price"> ${(price * quantity).toFixed(2)}</div>
             </div>
         </div>
     );

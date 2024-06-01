@@ -3,20 +3,7 @@ import { Col, Form, Row } from 'react-bootstrap';
 import './style.css';
 
 const AddressForm = ({
-  fullName,
-  address,
-  address2,
-  city,
-  state,
-  zip,
-  country,
-  setFullName,
-  setAddress,
-  setAddress2,
-  setCity,
-  setState,
-  setZip,
-  setCountry,
+  guestAddress, setGuestAddress
 }) => {
   return (
     <Form>
@@ -27,8 +14,8 @@ const AddressForm = ({
               type="text"
               placeholder="Full Name"
               className="add-address-input"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={guestAddress.fullName}
+              onChange={(e) => setGuestAddress({...guestAddress, fullName: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -41,8 +28,8 @@ const AddressForm = ({
               type="text"
               placeholder="Address"
               className="add-address-input"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={guestAddress.addressLine1}
+              onChange={(e) => setGuestAddress({...guestAddress, addressLine1: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -55,8 +42,8 @@ const AddressForm = ({
               type="text"
               placeholder="Address Line 2"
               className="add-address-input"
-              value={address2}
-              onChange={(e) => setAddress2(e.target.value)}
+              value={guestAddress.addressLine2}
+              onChange={(e) => setGuestAddress({...guestAddress, addressLine2: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -69,8 +56,8 @@ const AddressForm = ({
               type="text"
               placeholder="City"
               className="add-address-input"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={guestAddress.city}
+              onChange={(e) => setGuestAddress({...guestAddress, city: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -80,8 +67,8 @@ const AddressForm = ({
               type="text"
               placeholder="Zip/Postal"
               className="add-address-input"
-              value={zip}
-              onChange={(e) => setZip(e.target.value)}
+              value={guestAddress.zip}
+              onChange={(e) => setGuestAddress({...guestAddress, zip: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -94,8 +81,8 @@ const AddressForm = ({
               type="text"
               placeholder="State"
               className="add-address-input"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
+              value={guestAddress.state}
+              onChange={(e) => setGuestAddress({...guestAddress, state: e.target.value})}
             />
           </Form.Group>
         </Col>
@@ -104,8 +91,8 @@ const AddressForm = ({
             <Form.Control
               as="select"
               className="add-address-input"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              value={guestAddress.country}
+              onChange={(e) => setGuestAddress({...guestAddress, country: e.target.value})}
             >
               <option value="">Select Country</option>
               <option value="USA">United States</option>
