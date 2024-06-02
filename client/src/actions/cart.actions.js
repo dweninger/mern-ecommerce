@@ -136,6 +136,23 @@ export const removeFromCart = (product) => {
     };
 };
 
+export const clearCart = () => {
+    return async (dispatch, getState) => {
+        const { auth } = getState();
+
+        try {
+            if (auth.authenticate) {
+                await axios.post('/user/cart/clear');
+            }
+            localStorage.removeItem('cart');
+
+            dispatch({ type: cartConstants.RESET_CART });
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+        }
+    };
+};
+
 export const updateCart = () => {
     return async dispatch => {
         const { auth } = store.getState();

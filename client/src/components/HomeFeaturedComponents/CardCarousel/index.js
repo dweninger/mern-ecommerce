@@ -48,7 +48,14 @@ const CardCarousel = (props) => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "darkgray", borderRadius: "50%", }}
+                style={
+                    { 
+                        ...style, 
+                        display: "block", 
+                        background: "darkgray", 
+                        borderRadius: "50%", 
+                    }
+                }
                 onClick={onClick}
             />
         );
@@ -59,7 +66,15 @@ const CardCarousel = (props) => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "darkgray", borderRadius: "50%", }}
+                style={
+                    { 
+                        ...style, 
+                        display: "block", 
+                        background: "darkgray", 
+                        borderRadius: "50%", 
+
+                    }
+                }
                 onClick={onClick}
             />
         );

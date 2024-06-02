@@ -50,6 +50,7 @@ export default (state = initState, action) => {
             break;    
         case cartConstants.RESET_CART:
             state = {
+                ...state,
                 ...initState
             }
             break;

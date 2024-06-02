@@ -16,14 +16,14 @@ const OrderConfirmationPage = (props) => {
             <div className="order-confirmation-container">
                 <h2>Your Order Has Been Confirmed!</h2>
                 <div className="order-details">
-                    <h3>Order Details</h3>
-                    <div>
+                    <h3 id="order-details-title">Order Details:</h3>
+                    <div className="order-detail-container" id="order-id-container">
                         <strong>Order ID:</strong> {order.orderId} 
                     </div>
-                    <div>
+                    <div className="order-detail-container">
                         <strong>Order Total:</strong> ${order.orderTotal.toFixed(2)}
                     </div>
-                    <a className="btn btn-primary" href="/">Return Home</a>
+                    <a id="order-details-return-home-button" className="btn btn-primary" href="/">Return Home</a>
                 </div>
             </div>
         </Layout>

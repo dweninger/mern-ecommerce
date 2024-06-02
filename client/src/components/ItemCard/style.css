@@ -75,14 +75,14 @@
 .home-add-to-cart-button {
   width: 50%;
   margin-right: 5px;
-  background-color: #ff0000;
+  background-color: #bf1909;
   font-size: 14px;
   height: 100%;
   font-weight: 600;
 }
 
 .home-add-to-cart-button:hover {
-  background-color: #cc0000;
+  background-color: #ff0000;
 }
 
 .home-button {

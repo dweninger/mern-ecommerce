@@ -91,13 +91,24 @@ exports.removeItemFromCart = async (req, res) => {
     }
 };
 
+exports.clearUserCart = async (req, res) => {
+    const userId = req.user._id; // Assuming you have user information in req.user
+
+    try {
+        await Cart.deleteMany({ user: userId });
+        return res.status(200).json({ message: 'User cart cleared' });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+};
+
 exports.getCartItems = async (req, res) => {
     try {
         const cart = await Cart.findOne({ user: req.user._id })
             .populate('cartItems.product', '_id name price productPictures');
 
         if (!cart) {
-            return res.status(400).json({ error: 'Cart not found' });
+            return res.status(204).json({ error: 'Cart not found' });
         }
         const cartItems = cart.cartItems.map((item) => ({
             _id: item.product._id.toString(),

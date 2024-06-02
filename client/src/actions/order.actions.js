@@ -1,5 +1,6 @@
 import { orderConstants, cartConstants } from "./constants";
 import axios from "../helpers/axios";
+import { clearCart } from "./cart.actions";
 
 export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetails) => {
     return async (dispatch, getState) => {
@@ -18,7 +19,7 @@ export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetai
         if (auth.authenticate) {
             order = {
                 ...order,
-                user: auth
+                user: auth.user
             }
         } else {
             order = {
@@ -47,9 +48,3 @@ export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetai
         }
     } 
 };
-
-export const clearCart = () => {
-    return async (dispatch) => {
-        dispatch({ type: cartConstants.RESET_CART });
-    }
-}
