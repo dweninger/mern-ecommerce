@@ -12,10 +12,10 @@ export const Home = (props) => {
     <Layout sidebar>
 
 
-      {/* <div className="bg-white p-5 mb-4 mx-5">
-        <h1 className="text-center mb-4">Welcome to Admin Dashboard</h1>
-        <p className="text-center px-5 mx-4">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-      </div> */}
+      <div className="bg-white p-5 mb-4 mx-5">
+        <h1 className="text-center mb-4">Welcome to Tabletop Treasures Admin Dashboard</h1>
+        <p className="text-center px-5 mx-4">This dashboard is used to update the inventory of Tabletop Treasures' website as well as updating orders.</p>
+      </div>
     </Layout>
   )
 

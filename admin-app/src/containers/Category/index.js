@@ -192,7 +192,7 @@ const Category = (props) => {
                 <Row>
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Category</h3>
+                            <h3>Categories</h3>
                             <div className="categoryActionBtnContainer">
                                 <span>Actions: </span>
                                 <button className="btn btn-dark" onClick={handleShow}><IoAdd /><span> Add</span></button>

@@ -33,7 +33,6 @@ export const submitOrder = (guest, address, orderItems, orderTotal, paymentDetai
         try {
             const res = await axios.post('/order/submitorder', order);
             if (res.status === 201) {
-                console.log(res);
                 dispatch({
                     type: orderConstants.SUBMIT_ORDER_SUCCESS,
                     payload: {orderId: res.data.order._id, orderTotal: order.orderTotal}

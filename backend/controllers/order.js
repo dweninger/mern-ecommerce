@@ -37,3 +37,11 @@ exports.submitOrder = async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 };
+
+exports.getOrders = async (req, res) => {
+    const orders = await Order.find()
+      .select("_id user guest orderItems orderTotal orderStatus createdAt")
+      .exec();
+  
+    res.status(200).json({ orders });
+};

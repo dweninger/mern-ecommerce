@@ -34,6 +34,10 @@ export const productConstants = {
     GET_ALL_PRODUCTS_FAILURE: 'GET_ALL_PRODUCTS_FAILURE',
 }
 
+export const orderConstants = {
+    GET_ALL_ORDERS_SUCCESS: 'GET_ALL_ORDERS_SUCCESS',
+}
+
 export const initialDataConstants = {
     GET_ALL_INITIAL_DATA_REQUEST: 'GET_ALL_INITIAL_DATA_REQUEST',
     GET_ALL_INITIAL_DATA_SUCCESS: 'GET_ALL_INITIAL_DATA_SUCCESS',
