@@ -1,0 +1,7 @@
+.order-row:hover {
+    cursor: pointer;
+}
+
+.order-row:hover td {
+    background-color: lightgray;
+}

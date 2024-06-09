@@ -21,3 +21,11 @@
     max-height: 100%;
     object-fit: contain;
 }
+
+.product-row:hover {
+    cursor: pointer;
+}
+
+.product-row:hover td {
+    background-color: lightgray;
+}

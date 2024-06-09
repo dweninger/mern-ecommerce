@@ -45,3 +45,23 @@ exports.getOrders = async (req, res) => {
   
     res.status(200).json({ orders });
 };
+
+exports.updateOrderStatus = async (req, res) => {
+    const { id, status } = req.body;
+
+    try {
+        const order = await Order.findByIdAndUpdate(
+        id,
+        { $set: { orderStatus: status } },
+        { new: true, useFindAndModify: false }
+        );
+
+        if (!order) {
+        return res.status(404).json({ message: 'Order not found' });
+        }
+
+        res.status(201).json(order);
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong', error });
+    }
+}

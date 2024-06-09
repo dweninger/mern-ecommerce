@@ -109,7 +109,6 @@ const Category = (props) => {
     const updateCategory = () => {
         updateCheckedAndExpandedCategories();
         setUpdateCategoryModal(true);
-
     }
 
     const updateCheckedAndExpandedCategories = () => {

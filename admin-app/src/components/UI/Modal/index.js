@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap';
+import './style.css';
 
 /**
  * @author
@@ -9,7 +10,7 @@ import { Modal, Button } from 'react-bootstrap';
 const NewModal = (props) => {
     return (
         <Modal size={props.size} show={props.show} onHide={props.handleHide}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className="customClose">
                 <Modal.Title>{props.modalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>

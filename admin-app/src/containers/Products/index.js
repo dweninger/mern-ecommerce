@@ -82,7 +82,7 @@ const Products = (props) => {
           {
             product.products.length > 0 ?
               product.products.map(prod =>
-                <tr onClick={() => showProductDetailsModal(prod)} key={prod._id}>
+                <tr className="product-row" onClick={() => showProductDetailsModal(prod)} key={prod._id}>
                   <td>#</td>
                   <td>{prod.name}</td>
                   <td>{prod.price}</td>
