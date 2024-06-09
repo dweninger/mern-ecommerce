@@ -209,7 +209,7 @@ const Products = (props) => {
             <label className="key">Product Pictures</label>
             <div style={{ display: 'flex' }}>
               {productDetails.productPictures.map(picture =>
-                <div className="productImgContainer">
+                <div key={picture._id} className="productImgContainer">
                   <img src={generatePublicUrl(picture.img)} />
                 </div>
               )}
