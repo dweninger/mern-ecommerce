@@ -83,7 +83,7 @@ const Products = (props) => {
             product.products.length > 0 ?
               product.products.map(prod =>
                 <tr className="product-row" onClick={() => showProductDetailsModal(prod)} key={prod._id}>
-                  <td>#</td>
+                  <td>{prod._id}</td>
                   <td>{prod.name}</td>
                   <td>{prod.price}</td>
                   <td>{prod.quantity}</td>
@@ -173,7 +173,12 @@ const Products = (props) => {
         modalTitle={'Product Details'}
         size="lg"
       >
-
+        <Row>
+          <Col md="6">
+            <label className="key">#</label>
+            <p className="value">{productDetails._id}</p>
+          </Col>
+        </Row>
         <Row>
           <Col md="6">
             <label className="key">Name</label>
@@ -181,11 +186,11 @@ const Products = (props) => {
           </Col>
           <Col md="3">
             <label className="key">Price</label>
-            <p className="value">{productDetails.price}</p>
+            <p className="value">${productDetails.price}</p>
           </Col>
           <Col md="3">
             <label className="key">Offer</label>
-            <p className="value">{productDetails.offer}</p>
+            <p className="value">${productDetails.offer}</p>
           </Col>
         </Row>
         <Row>
